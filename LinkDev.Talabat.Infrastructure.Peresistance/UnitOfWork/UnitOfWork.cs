@@ -9,7 +9,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 	internal class UnitOfWork : IUnitOfWork
 
 	{
-		private readonly StoreContext _storeContext;
+		private readonly StoreContext _storeContext; 
 		private readonly Lazy<IGenericRepository<Product, int>> _productRepo;
 		private readonly Lazy<IGenericRepository<ProductBrand, int>> _brandtRepo;
 		private readonly Lazy<IGenericRepository<ProductCategory, int>> _categoryRepo;
