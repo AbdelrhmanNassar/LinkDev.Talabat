@@ -12,7 +12,7 @@ namespace LinkDev.Talabat.Core.Domain.Comman
 
         public required string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
-        public required string LastModigiedBy { get; set; }
+        public required string LastModifiedBy { get; set; }
         public DateTime LastModifiedOn { get; set; }
 
 

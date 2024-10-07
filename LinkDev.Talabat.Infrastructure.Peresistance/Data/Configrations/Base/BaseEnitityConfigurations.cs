@@ -26,7 +26,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Base
             .IsRequired();
             //.HasDefaultValueSql();
 
-            builder.Property(E => E.LastModigiedBy)
+            builder.Property(E => E.LastModifiedBy)
             .IsRequired();
 
             builder.Property(E => E.LastModifiedOn)

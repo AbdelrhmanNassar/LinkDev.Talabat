@@ -53,10 +53,12 @@ namespace LinkDev.Talabat.Api
 				if (pendingMigrations.Any())
 					await storeContext.Database.MigrateAsync();
 
+			await	StoreDbContextSeed.Seed(storeContext);
+
 			}catch (Exception ex)
 			{
 				var logger = loggerFactory.CreateLogger<Program>();
-				logger.LogError("An Error Happened during migration");
+				logger.LogError("An Error Happened during migration or dataseeding");
 
 			}
 			finally
