@@ -1,4 +1,6 @@
 
+using LinkDev.Talabat.Api.Extensions;
+using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Infrastructure.Peresistance.Data;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using Microsoft.AspNetCore.Mvc;
@@ -39,32 +41,8 @@ namespace LinkDev.Talabat.Api
 		
 			var app = webAppilcationBuilder.Build();//build web application
 
-			#region update Database And ask for object form di container explicilitly
-			var scope = app.Services.CreateScope(); //you should dispose the scope after using it
-			var services = scope.ServiceProvider;
-			var storeContext = services.GetRequiredService<StoreContext>();
-
-			var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-			//var logger = services.GetRequiredService<ILogger<Program>>();
-
-			try
-			{
-				var pendingMigrations = storeContext.Database.GetPendingMigrations();
-				if (pendingMigrations.Any())
-					await storeContext.Database.MigrateAsync();
-
-			await	StoreDbContextSeed.Seed(storeContext);
-
-			}catch (Exception ex)
-			{
-				var logger = loggerFactory.CreateLogger<Program>();
-				logger.LogError("An Error Happened during migration or dataseeding");
-
-			}
-			finally
-			{
-				storeContext.Dispose();
-			}
+			#region intialize StoreContext database
+			await app.intializeStoreContex();
 
 			#endregion
 

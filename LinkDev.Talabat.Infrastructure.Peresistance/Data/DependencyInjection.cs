@@ -1,4 +1,5 @@
 ﻿
+using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,8 +20,9 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 			{
 				optionsBuilder.UseSqlServer(configuration.GetConnectionString("storeConnection"));
 
-			})
-				; 
+			});
+			services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreContextInitialzer));
+			services.AddScoped<IStoreContextInitialzer, StoreContextInitialzer>();
 			return services;
 
 

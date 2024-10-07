@@ -31,20 +31,5 @@ namespace LinkDev.Talabat.Api.Controllers
 			.ToArray();
 		}
 
-		[HttpPost(Name = "GetWeatherForecast")]
-		public IEnumerable<string> GetOther()
-		{
-			List<string> random = new List<string>() { "Abdo", "Mostafa", "Hazem" };
-			Random random1 = new Random();
-			return Enumerable.Range(1, 3).Select(num => random[random1.Next(random.Count)]);
-			//	return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-			//	{
-			//		Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-			//		TemperatureC = Random.Shared.Next(-20, 55),
-			//		Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-			//	})
-			//	.ToArray();
-			//}
-		}
 	}
 }
