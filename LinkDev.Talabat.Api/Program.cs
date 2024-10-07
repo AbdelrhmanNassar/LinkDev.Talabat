@@ -1,27 +1,53 @@
 
+using LinkDev.Talabat.Api.Extensions;
+using LinkDev.Talabat.Core.Domain.Contracts;
+using LinkDev.Talabat.Infrastructure.Peresistance.Data;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.Intrinsics.X86;
 
 namespace LinkDev.Talabat.Api
 {
 	public class Program
 	{
-		public static void Main(string[] args)
+		//[FromServices]
+		//public static StoreContext StoreContext { get; set;}
+        public static   async Task Main(string[] args)
 		{
 			var webAppilcationBuilder = WebApplication.CreateBuilder(args);
-
+			
 			// Add services to the container.
 			//services is the di container
 			#region Configure Services
 			// Adds services for controllers only to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection  .This method will not
 			/// register services used for views or pages.
 			webAppilcationBuilder.Services.AddControllers();//register required serivce of webapi to di container to work with it 
-															// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+														// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			webAppilcationBuilder.Services.AddEndpointsApiExplorer();
-			webAppilcationBuilder.Services.AddSwaggerGen(); 
+			webAppilcationBuilder.Services.AddSwaggerGen();
+			
+		
+			//webAppilcationBuilder.Services.AddDbContext<StoreContext>(optionsBuilder =>
+			//{
+			//optionsBuilder.UseSqlServer(webAppilcationBuilder.Configuration.GetConnectionString("storeConnection"));
+
+			//}
+			//);
+			//	DependencyInjection.AddPersistanceServices(webAppilcationBuilder.Services,webAppilcationBuilder.Configuration);
+			webAppilcationBuilder.Services.AddPersistanceServices(webAppilcationBuilder.Configuration);
+	
+			#endregion
+		
+			var app = webAppilcationBuilder.Build();//build web application
+
+			#region intialize StoreContext database
+			await app.intializeStoreContex();
+
 			#endregion
 
-			var app = webAppilcationBuilder.Build();//build web application
+
+
 
 			// Configure the HTTP request pipeline.
 			#region determining MiddleWares before Running = Configure Kestral Middleware 
