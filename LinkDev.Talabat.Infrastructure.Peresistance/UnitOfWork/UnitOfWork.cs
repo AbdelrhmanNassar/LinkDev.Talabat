@@ -15,7 +15,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 		private readonly Lazy<IGenericRepository<ProductCategory, int>> _categoryRepo;
 
 		public UnitOfWork(StoreContext storeContext)
-        {
+        { 
             _storeContext = storeContext;
 			_productRepo = new Lazy<IGenericRepository<Product, int>>( ()=> new GenericRepo<Product,int>(_storeContext) );
 			_brandtRepo = new Lazy<IGenericRepository<ProductBrand, int>>( ()=> new GenericRepo<ProductBrand, int>(_storeContext) );
