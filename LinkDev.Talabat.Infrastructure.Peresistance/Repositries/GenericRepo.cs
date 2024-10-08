@@ -1,5 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Comman;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
+using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Infrastructure.Peresistance.Data;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +17,28 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries
 		where Tkey : IEquatable<Tkey>
 	{
 		public async Task<IEnumerable<TEnitity>> GetAllAsync(bool withTracking = false)
-		=> withTracking ? await storeContext.Set<TEnitity>().AsNoTracking().ToListAsync():
-					      await storeContext.Set<TEnitity>().ToListAsync();
+		{
+			if (typeof(TEnitity) == typeof(Product))
+			{
+				// If TEntity is Product, include related entities
+			return	 withTracking
+					? (IEnumerable<TEnitity>) await storeContext.Set<Product>().Include(p => p.ProductBrand).Include(p => p.ProductCategory).ToListAsync()
+					: (IEnumerable<TEnitity>)await storeContext.Set<Product>().AsNoTracking().Include(p => p.ProductBrand).Include(p => p.ProductCategory).ToListAsync();
+			}
 
+			// For all other TEntity types
+			return withTracking
+				? await storeContext.Set<TEnitity>().ToListAsync()
+				: await storeContext.Set<TEnitity>().AsNoTracking().ToListAsync();
+		}
 		public async Task<TEnitity?> GetAsync(Tkey id)
-		=> await storeContext.Set<TEnitity>().FindAsync(id);
+		{
+			if (typeof(TEnitity) == typeof(Product))
+			
+				return await storeContext.Set<Product>().Include(p => p.ProductBrand).Include(p => p.ProductCategory).FirstOrDefaultAsync(P=>P.Id.Equals( id )) as TEnitity;
+
+			return  await storeContext.Set<TEnitity>().FirstOrDefaultAsync(P => P.Id.Equals(id));
+		}
 		public async Task AddAsync(TEnitity entity)
 		=> await storeContext.Set<TEnitity>().AddAsync(entity);
 
