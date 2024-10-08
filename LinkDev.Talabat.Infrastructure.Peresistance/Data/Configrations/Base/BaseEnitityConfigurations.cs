@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Base
 {
     public class BaseEnitityConfigurations<TEntity,TKey> : IEntityTypeConfiguration<TEntity>
-        where TEntity : BaseEnitity<TKey> where TKey : IEquatable<TKey>
+        where TEntity : BaseAuditableEntitiy<TKey> where TKey : IEquatable<TKey>
     {//very important
 
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)

@@ -1,7 +1,8 @@
-﻿
-using LinkDev.Talabat.Core.Domain.Contracts;
+﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
+using LinkDev.Talabat.Infrastructure.Peresistance.Interceptors;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 {
-	public static class DependencyInjection
+    public static class DependencyInjection
 	{
 		public static IServiceCollection AddPersistanceServices(this IServiceCollection services ,IConfiguration configuration) {
 
@@ -23,6 +24,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 			});
 			services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreContextInitialzer));
 			services.AddScoped<IStoreContextInitialzer, StoreContextInitialzer>();
+			services.AddScoped<ISaveChangesInterceptor, BaseAuditableEntityInterceptor>();
 			return services;
 
 

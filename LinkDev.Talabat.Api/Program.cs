@@ -1,5 +1,7 @@
 
 using LinkDev.Talabat.Api.Extensions;
+using LinkDev.Talabat.Api.Services;
+using LinkDev.Talabat.Core._Application.Abstraction;
 using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Infrastructure.Peresistance.Data;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
@@ -36,6 +38,7 @@ namespace LinkDev.Talabat.Api
 			//);
 			//	DependencyInjection.AddPersistanceServices(webAppilcationBuilder.Services,webAppilcationBuilder.Configuration);
 			webAppilcationBuilder.Services.AddPersistanceServices(webAppilcationBuilder.Configuration);
+			webAppilcationBuilder.Services.AddScoped(typeof(ILoggedInUserServices), typeof(LoggedInUserServices));
 	
 			#endregion
 		

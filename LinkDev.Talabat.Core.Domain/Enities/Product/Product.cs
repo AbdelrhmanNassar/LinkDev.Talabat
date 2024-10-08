@@ -1,6 +1,6 @@
 ﻿namespace LinkDev.Talabat.Core.Domain.Enities.Product
 {
-	public class Product :BaseEnitity<int>
+	public class Product :BaseAuditableEntitiy<int>
 	{
         public required string Name { get; set; }
 

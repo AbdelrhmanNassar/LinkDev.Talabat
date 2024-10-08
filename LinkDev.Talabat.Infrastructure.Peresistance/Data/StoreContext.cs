@@ -1,4 +1,5 @@
-﻿using LinkDev.Talabat.Core.Domain.Enities.Product;
+﻿using LinkDev.Talabat.Core.Domain.Comman;
+using LinkDev.Talabat.Core.Domain.Enities.Product;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace LinkDev.Talabat.Infrastrucutre.Infrastructure.Date
         {
             
         }
+	
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//i prefer this
