@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork;
+
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 {
     public static class DependencyInjection
@@ -25,6 +27,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 			services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreContextInitialzer));
 			services.AddScoped(typeof(IStoreContextInitialzer),typeof( StoreContextInitialzer));
 			services.AddScoped(typeof(ISaveChangesInterceptor),typeof(BaseAuditableEntityInterceptor));
+			services.AddScoped<IUnitOfWork, LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork.UnitOfWork>();
 			return services;
 
 

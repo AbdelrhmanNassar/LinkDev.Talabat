@@ -1,4 +1,4 @@
-﻿using LinkDev.Talabat.Core._Application.Abstraction;
+﻿using LinkDev.Talabat.Core.Application.Abstraction;
 using System.Security.Claims;
 
 namespace LinkDev.Talabat.Api.Services

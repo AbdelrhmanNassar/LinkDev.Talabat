@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Core.Application.Abstraction
+namespace LinkDev.Talabat.Apis.Controllers.Controllers
 {
-	public interface ILoggedInUserServices
+	public class AssemblyInformation
 	{
-		string UserId{ get; }
 	}
 }
