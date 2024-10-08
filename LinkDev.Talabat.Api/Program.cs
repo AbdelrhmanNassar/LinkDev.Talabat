@@ -71,7 +71,7 @@ namespace LinkDev.Talabat.Api
 
 			app.MapControllers();//to use the route attriute in every controller
 			#endregion
-
+			app.UseStaticFiles();
 			app.Run();
 		}
 	}
