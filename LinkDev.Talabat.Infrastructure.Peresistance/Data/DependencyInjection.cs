@@ -23,8 +23,8 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 
 			});
 			services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreContextInitialzer));
-			services.AddScoped<IStoreContextInitialzer, StoreContextInitialzer>();
-			services.AddScoped<ISaveChangesInterceptor, BaseAuditableEntityInterceptor>();
+			services.AddScoped(typeof(IStoreContextInitialzer),typeof( StoreContextInitialzer));
+			services.AddScoped(typeof(ISaveChangesInterceptor),typeof(BaseAuditableEntityInterceptor));
 			return services;
 
 

@@ -28,8 +28,8 @@ namespace LinkDev.Talabat.Api
 														// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			webAppilcationBuilder.Services.AddEndpointsApiExplorer();
 			webAppilcationBuilder.Services.AddSwaggerGen();
-			
-		
+
+
 			//webAppilcationBuilder.Services.AddDbContext<StoreContext>(optionsBuilder =>
 			//{
 			//optionsBuilder.UseSqlServer(webAppilcationBuilder.Configuration.GetConnectionString("storeConnection"));
@@ -37,8 +37,9 @@ namespace LinkDev.Talabat.Api
 			//}
 			//);
 			//	DependencyInjection.AddPersistanceServices(webAppilcationBuilder.Services,webAppilcationBuilder.Configuration);
-			webAppilcationBuilder.Services.AddPersistanceServices(webAppilcationBuilder.Configuration);
 			webAppilcationBuilder.Services.AddScoped(typeof(ILoggedInUserServices), typeof(LoggedInUserServices));
+			webAppilcationBuilder.Services.AddPersistanceServices(webAppilcationBuilder.Configuration);
+			
 	
 			#endregion
 		
