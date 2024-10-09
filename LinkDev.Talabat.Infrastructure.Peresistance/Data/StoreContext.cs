@@ -26,5 +26,49 @@ namespace LinkDev.Talabat.Infrastrucutre.Infrastructure.Date
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//i prefer this
 		///	modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreContext).Assembly);
 		}
+
+		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+		{
+		//	//other implemention or condition
+		//	#region Implemention 1 i don't like it because i think the performance will not be good
+		//	foreach (var entry in this.ChangeTracker.Entries<BaseAuditableEntitiy<int>>()
+		//			.Where(entry => entry.State is EntityState.Added or EntityState.Modified)
+		//			)
+		//	{
+		//		if (entry is { State: EntityState.Modified or EntityState.Added })
+		//		{
+
+
+		//			if (entry.State == EntityState.Added)
+		//			{
+		//				entry.Entity.CreatedBy = "";
+		//				entry.Entity.CreatedOn = DateTime.UtcNow;
+		//			}
+		//			entry.Entity.LastModifiedBy = "";
+		//			entry.Entity.LastModifiedOn = DateTime.UtcNow;
+		//		}
+		//	}
+		//	#endregion
+		//	#region This is A better impelemention as i think
+		//	foreach (var entry in this.ChangeTracker.Entries<BaseAuditableEntitiy<int>>())
+		//	{
+		//		if (entry is { State: EntityState.Modified or EntityState.Added })
+		//		{
+
+
+		//			if (entry.State == EntityState.Added)
+		//			{
+		//				entry.Entity.CreatedBy = "";
+		//				entry.Entity.CreatedOn = DateTime.UtcNow;
+		//			}
+		//			entry.Entity.LastModifiedBy = "";
+		//			entry.Entity.LastModifiedOn = DateTime.UtcNow;
+		//		}
+		//	} 
+	
+
+		//	#endregion
+			return base.SaveChangesAsync(cancellationToken);
+		}
 	}
 }

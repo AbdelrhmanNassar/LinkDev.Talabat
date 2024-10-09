@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Comman
 {
-	public class BaseEntity<TKey>
+	public  abstract class BaseEntity<TKey>
+		 where TKey : IEquatable<TKey>
 	{
 		public required TKey Id { get; set; }
 	}

@@ -21,7 +21,7 @@ namespace LinkDev.Talabat.Core.Application.Mapping
 		{
 			if (!string.IsNullOrEmpty(source.PictureUrl))
 			{
-				return $"{"https://localhost:7219"}{source.PictureUrl}";
+				return $"{"https://localhost:7219"}/{source.PictureUrl}";
 			}
 			return string.Empty ;
 		}

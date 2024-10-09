@@ -16,10 +16,11 @@ namespace LinkDev.Talabat.Core.Application.Mapping
         {
             CreateMap<ProductBrand, BrandDto>();
             CreateMap<ProductCategory, CategoryDto>();
-            CreateMap<Product, ProductToReturnDto>()// i should do some configurations because there is properites same name but not same type
-            .ForMember(d => d.ProductBrand, O => O.MapFrom(P => P.ProductBrand.Name))
-            .ForMember(d => d.ProductCategory, O => O.MapFrom(P => P.ProductCategory.Name))
-            .ForMember(d => d.PictureUrl,O=>O.MapFrom<PictureUrlResolver>());
+
+            CreateMap<Product, ProductToReturnDto>()
+                .ForMember(Pto => Pto.ProductBrand, O => O.MapFrom(P => P.ProductBrand!.Name))// i should do some configurations because there is properites same name but not same type
+				.ForMember(Pto => Pto.ProductCategory, O => O.MapFrom(p => p.ProductCategory!.Name))
+                .ForMember(d => d.PictureUrl,O=>O.MapFrom<PictureUrlResolver>());
 
 
 				;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LinkDev.Talabat.Core.Domain.Contracts.Persistance
 {
     public interface IGenericRepository<TEntity, Tkey>
-        where TEntity : BaseAuditableEntitiy<Tkey>
+        where TEntity : BaseEntity<Tkey>
         where Tkey : IEquatable<Tkey>
     {
 

@@ -11,8 +11,11 @@ namespace LinkDev.Talabat.Core.Application
 
 		{
 			//services.AddAutoMapper(M => M.AddProfile<MappingProfile>());
+			//services.AddAutoMapper(M => M.AddProfile(new MappingProfile));
 			//services.AddAutoMapper(typeof(MappingProfile));
-			services.AddAutoMapper(typeof(MappingProfile).Assembly);
+			//services.AddAutoMapper(typeof(MappingProfile).Assembly);
+			services.AddAutoMapper(typeof(MappingProfile));
+	
 			services.AddScoped(typeof(IServiceManager), typeof(LinkDev.Talabat.Core.Application.Services.ServiceManager));
 			return services;
 		}

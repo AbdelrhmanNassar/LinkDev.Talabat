@@ -10,14 +10,16 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Base
 {
-    public class BaseEnitityConfigurations<TEntity,TKey> : IEntityTypeConfiguration<TEntity>
+    public class BaseAuditableEnitityConfigurations<TEntity,TKey> :BaseEnitiyConfigurations<TEntity,TKey>
         where TEntity : BaseAuditableEntitiy<TKey> where TKey : IEquatable<TKey>
     {//very important
 
-        public virtual void Configure(EntityTypeBuilder<TEntity> builder)
+        public override void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(E => E.Id)
-            .ValueGeneratedOnAdd();
+
+            base.Configure(builder);
+
+
 
             builder.Property(E => E.CreatedBy)
             .IsRequired();

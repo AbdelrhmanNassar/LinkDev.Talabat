@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Contracts
 {
-	public interface ISpecifications<TEnitiy,Tkey> where TEnitiy :BaseAuditableEntitiy<Tkey>
+	public interface ISpecifications<TEnitiy,Tkey> where TEnitiy :BaseEntity<Tkey>
 		where Tkey : IEquatable<Tkey>
 	{
         public Expression<Func<TEnitiy,bool>> Criteria { get; set; }

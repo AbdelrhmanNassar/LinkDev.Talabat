@@ -14,7 +14,7 @@ namespace LinkDev.Talabat.Core.Domain.NewFolder
 	{
 		//public Expression<Predicate<TEntity>> Criteria { get; set; } = null;
 		public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new ();
-		public Expression<Func<TEntity, bool>> Criteria { get ; set ; }
+		public Expression<Func<TEntity, bool>>? Criteria { get ; set ; }
 
 		public BaseSpecifications()
         {

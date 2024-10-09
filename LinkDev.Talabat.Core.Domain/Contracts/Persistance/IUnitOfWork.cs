@@ -10,7 +10,7 @@ namespace LinkDev.Talabat.Core.Domain.Contracts.Persistance
     public interface IUnitOfWork : IAsyncDisposable
     {
         public IGenericRepository<TEnitity, Tkey> GetRepository<TEnitity, Tkey>()
-            where TEnitity : BaseAuditableEntitiy<Tkey>
+            where TEnitity : BaseEntity<Tkey>
             where Tkey : IEquatable<Tkey>;
 
 

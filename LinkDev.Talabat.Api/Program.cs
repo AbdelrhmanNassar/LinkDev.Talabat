@@ -3,12 +3,12 @@ using LinkDev.Talabat.Api.Extensions;
 using LinkDev.Talabat.Api.Services;
 using LinkDev.Talabat.Apis.Controllers.Controllers;
 using LinkDev.Talabat.Core.Application.Abstraction;
-using LinkDev.Talabat.Infrastructure.Peresistance.Data;
 using LinkDev.Talabat.Core.Application;
+using LinkDev.Talabat.Infrastructure.Peresistance;
 
 namespace LinkDev.Talabat.Api
 {
-	public class Program
+    public class Program
 	{
 		//[FromServices]
 		//public static StoreContext StoreContext { get; set;}
@@ -21,10 +21,12 @@ namespace LinkDev.Talabat.Api
 			#region Configure Services
 			// Adds services for controllers only to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection  .This method will not
 			/// register services used for views or pages.
-			webAppilcationBuilder.Services.AddControllers().AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
+			webAppilcationBuilder.Services.AddControllers().
+				AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
 														// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			webAppilcationBuilder.Services.AddEndpointsApiExplorer();
 			webAppilcationBuilder.Services.AddSwaggerGen();
+			webAppilcationBuilder.Services.AddHttpContextAccessor();
 
 
 			//webAppilcationBuilder.Services.AddDbContext<StoreContext>(optionsBuilder =>
@@ -69,7 +71,10 @@ namespace LinkDev.Talabat.Api
 			//			app.UseAuthorization();
 
 
-			app.MapControllers();//to use the route attriute in every controller
+			app.MapControllers();//to use the route attriute in every controller means  each controller annotated as[ApiController]
+								//
+		 //app.MapControllerRoute()//for mvc
+
 			#endregion
 			app.UseStaticFiles();
 			app.Run();

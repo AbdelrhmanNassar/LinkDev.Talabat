@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Product
 {
-	internal class BrandConfigurations : BaseEnitityConfigurations<ProductBrand,int>
+	internal class BrandConfigurations : BaseAuditableEnitityConfigurations<ProductBrand,int>
 	{
 		public override void Configure(EntityTypeBuilder<ProductBrand> builder)
 		{

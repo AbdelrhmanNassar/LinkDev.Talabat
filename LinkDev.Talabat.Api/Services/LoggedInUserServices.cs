@@ -6,15 +6,15 @@ namespace LinkDev.Talabat.Api.Services
 	public class LoggedInUserServices : ILoggedInUserServices
 
 	{
-		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly IHttpContextAccessor? _httpContextAccessor;
 
-		public string UserId { get; }
+		public string? UserId { get; }
 
-  //      public LoggedInUserServices(IHttpContextAccessor httpContextAccessor) // i just comment it because i don't register it yet
-  //      {
-		//	_httpContextAccessor = httpContextAccessor;
-		//	UserId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-		//}
-    }
+		public LoggedInUserServices(IHttpContextAccessor? httpContextAccessor) // i just comment it because i don't register it yet
+		{
+			_httpContextAccessor = httpContextAccessor;
+			UserId = _httpContextAccessor?.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+		}
+	}
 
 }

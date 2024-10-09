@@ -22,7 +22,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 		}	
 		
 		[HttpGet("{id}")] //Get:/api/Products/id
-		public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts(int id) //this is like what we had read in the artical
+		public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProduct(int id) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines
 		{
 			var product = await serviceManager.ProductService.GetProductAsync(id);

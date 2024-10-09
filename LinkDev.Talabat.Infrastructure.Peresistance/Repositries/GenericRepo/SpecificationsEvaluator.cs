@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
 {
 	internal static class SpecificationsEvaluator<TEntity,Tkey>
-		where TEntity : BaseAuditableEntitiy<Tkey>
+		where TEntity : BaseEntity<Tkey>
 		where Tkey : IEquatable<Tkey>
 	{
 		public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, Core.Domain.Contracts.ISpecifications<TEntity, Tkey> specifications)

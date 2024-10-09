@@ -27,7 +27,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 		=>_storeContext.DisposeAsync();
 
 		public IGenericRepository<TEnitity, Tkey> GetRepository<TEnitity, Tkey>()
-			where TEnitity : BaseAuditableEntitiy<Tkey>
+			where TEnitity : BaseEntity<Tkey>
 			where Tkey : IEquatable<Tkey>
 		{
 			//var typeName = typeof(TEnitity).Name;//will get the type  as string

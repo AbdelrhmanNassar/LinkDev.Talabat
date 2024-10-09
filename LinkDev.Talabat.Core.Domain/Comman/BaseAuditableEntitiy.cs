@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace LinkDev.Talabat.Core.Domain.Comman
 {
     public abstract class BaseAuditableEntitiy<TKey> :BaseEntity<TKey>
+        where TKey :IEquatable<TKey>    
     {
       
 

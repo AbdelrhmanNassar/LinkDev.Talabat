@@ -9,7 +9,7 @@ namespace LinkDev.Talabat.Api.Extensions
 		{
 			#region update Database And ask for object form di container explicilitly
 			var scope = app.Services.CreateScope(); //you should dispose the scope after using it
-			var services = scope.ServiceProvider;
+			var services = scope.ServiceProvider;//اللي كنت عملتلها ريجيستر قبل ما تعمل بيلد 
 			var contextInizilaer = services.GetRequiredService<IStoreContextInitialzer>();
 
 			var loggerFactory = services.GetRequiredService<ILoggerFactory>();
