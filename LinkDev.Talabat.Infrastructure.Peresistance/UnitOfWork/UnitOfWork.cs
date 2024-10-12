@@ -1,14 +1,15 @@
 ﻿
 using LinkDev.Talabat.Core.Domain.Comman;
-using LinkDev.Talabat.Core.Domain.Contracts;
+using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Infrastructure.Peresistance.Repositries;
+using LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using System.Collections.Concurrent;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 {
-	internal class UnitOfWork : IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
 
 	{
 		private readonly StoreContext _storeContext; 
@@ -26,7 +27,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 		=>_storeContext.DisposeAsync();
 
 		public IGenericRepository<TEnitity, Tkey> GetRepository<TEnitity, Tkey>()
-			where TEnitity : BaseEnitity<Tkey>
+			where TEnitity : BaseEntity<Tkey>
 			where Tkey : IEquatable<Tkey>
 		{
 			//var typeName = typeof(TEnitity).Name;//will get the type  as string

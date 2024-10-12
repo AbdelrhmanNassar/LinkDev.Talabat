@@ -1,9 +1,9 @@
-﻿using LinkDev.Talabat.Core.Domain.Contracts;
+﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
 {
-	internal class StoreContextInitialzer(StoreContext context) : IStoreContextInitialzer
+    internal class StoreContextInitialzer(StoreContext context) : IStoreContextInitialzer
 	{
 		public async Task Inialize()
 		{

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Product
 {
-	public class ProductConfigurations : BaseEnitityConfigurations<LinkDev.Talabat.Core.Domain.Enities.Product.Product,int>
+	public class ProductConfigurations : BaseAuditableEnitityConfigurations<LinkDev.Talabat.Core.Domain.Enities.Product.Product,int>
 	{
 		public override void Configure(EntityTypeBuilder<LinkDev.Talabat.Core.Domain.Enities.Product.Product> builder)
 		{

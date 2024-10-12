@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Comman
 {
-    public abstract class BaseEnitity<TKey>
+    public abstract class BaseAuditableEntitiy<TKey> :BaseEntity<TKey>
+        where TKey :IEquatable<TKey>    
     {
-        public required TKey Id { get; set; }
+      
 
         public required string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
