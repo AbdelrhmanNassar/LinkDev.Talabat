@@ -19,14 +19,14 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
         where TEnitity : BaseEntity<Tkey>
         where Tkey : IEquatable<Tkey>
     {
-        public async Task<IEnumerable<TEnitity>> GetAllAsync(bool withTracking = false)
+        public async Task<IReadOnlyList<TEnitity>> GetAllAsync(bool withTracking = false)
         {
             if (typeof(TEnitity) == typeof(Product))// not achive  open closed principle (specification design pattern To Solve this Problem)
             {
                 // If TEntity is Product, include related entities
                 return withTracking
-                        ? (IEnumerable<TEnitity>)await storeContext.Set<Product>().Include(p => p.ProductBrand).Include(p => p.ProductCategory).ToListAsync()
-                        : (IEnumerable<TEnitity>)await storeContext.Set<Product>().AsNoTracking().Include(p => p.ProductBrand).Include(p => p.ProductCategory).ToListAsync();
+                        ? (IReadOnlyList<TEnitity>)await storeContext.Set<Product>().Include(p => p.ProductBrand).Include(p => p.ProductCategory).ToListAsync()
+                        : (IReadOnlyList<TEnitity>)await storeContext.Set<Product>().AsNoTracking().Include(p => p.ProductBrand).Include(p => p.ProductCategory).ToListAsync();
             }
 
             // For all other TEntity types
@@ -53,7 +53,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
         public void DeleteAsync(TEnitity entity)
                 => storeContext.Set<TEnitity>().Remove(entity);
 
-		public async Task<IEnumerable<TEnitity>> GetAllWithSpecAsync(ISpecifications<TEnitity, Tkey> specifications , bool withTracking = false)
+		public async Task<IReadOnlyList<TEnitity>> GetAllWithSpecAsync(ISpecifications<TEnitity, Tkey> specifications , bool withTracking = false)
 		{
 			return await SpecificationsEvaluator<TEnitity,Tkey>.GetQuery(storeContext.Set<TEnitity>(), specifications).ToListAsync();
 		}

@@ -15,6 +15,8 @@ namespace LinkDev.Talabat.Core.Domain.NewFolder
 		//public Expression<Predicate<TEntity>> Criteria { get; set; } = null;
 		public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new ();
 		public Expression<Func<TEntity, bool>>? Criteria { get ; set ; }
+		public Expression<Func<TEntity, object>>? OrderBy { get; set; } 
+		public Expression<Func<TEntity, object>>? OrderByDesc { get; set; }
 
 		public BaseSpecifications()
         {
@@ -27,5 +29,21 @@ namespace LinkDev.Talabat.Core.Domain.NewFolder
 			Criteria = E => E.Id.Equals(id); 
 			Includes = new List<Expression<Func<TEntity, object>>>();
 		}
+
+		private protected virtual void  Include()
+		{
+
+		}
+
+		private protected virtual void  AddOrderBy(Expression<Func<TEntity,object>>? orderBy) {
+			this.OrderBy = orderBy;
+
+		}   
+		private protected virtual void   AddOrderByDesc(Expression<Func<TEntity,object>>? orderByDecs) {
+			
+			this.OrderByDesc = orderByDecs;
+		}
+
+
     }
 }

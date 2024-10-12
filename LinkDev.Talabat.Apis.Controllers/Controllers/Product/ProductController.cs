@@ -14,10 +14,10 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 	public class ProductController(IServiceManager serviceManager) : ApiControllerBase
 	{
 		[HttpGet] //Get:/api/Products
-		public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts() //this is like what we had read in the artical
+		public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string? sort) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines
-		{
-			var products = await serviceManager.ProductService.GetAllProductAsync();
+		 {
+			var products = await serviceManager.ProductService.GetAllProductAsync(sort);
 			return Ok(products);
 		}	
 		
@@ -32,7 +32,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 		}
 
 		[HttpGet("brands")] //Get:/api/Products/brands
-		public async Task<ActionResult< IEnumerable<BrandDto>>> GetBrands()
+		public async Task<ActionResult<IReadOnlyList<BrandDto>>> GetBrands()
 		{
 			var res = await serviceManager.ProductService.GetBrandsAsync();
 			if (res == null)
@@ -42,7 +42,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 		}
 		
 		[HttpGet("categories")] //Get:/api/Products/categories
-		public async Task<ActionResult< IEnumerable<CategoryDto>>> GetCategories()
+		public async Task<ActionResult<IReadOnlyList<CategoryDto>>> GetCategories()
 		{
 			var res = await serviceManager.ProductService.GetCategoriesAsync();
 			if (res == null)

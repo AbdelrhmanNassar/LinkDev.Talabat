@@ -9,12 +9,12 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.Product
 {
 	public interface IProductService
 	{
-		Task<IEnumerable<ProductToReturnDto>> GetAllProductAsync();
+		Task<IReadOnlyList<ProductToReturnDto>> GetAllProductAsync(string? sort);
 
 		Task<ProductToReturnDto> GetProductAsync(int id);
 
-		Task<IEnumerable<BrandDto>> GetBrandsAsync();
-		Task<IEnumerable<CategoryDto>> GetCategoriesAsync();
+		Task<IReadOnlyList<BrandDto>> GetBrandsAsync();
+		Task<IReadOnlyList<CategoryDto>> GetCategoriesAsync();
 
 	}
 }

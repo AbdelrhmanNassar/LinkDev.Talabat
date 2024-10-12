@@ -11,8 +11,8 @@ namespace LinkDev.Talabat.Core.Domain.Contracts.Persistance
         where Tkey : IEquatable<Tkey>
     {
 
-        Task<IEnumerable<TEntity>> GetAllAsync(bool withTracking = false);
-        Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity,Tkey> specifications, bool withTracking = false);
+        Task<IReadOnlyList<TEntity>> GetAllAsync(bool withTracking = false);
+        Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity,Tkey> specifications, bool withTracking = false);
       
         Task<TEntity?> GetAsync(Tkey id);
         Task<TEntity?> GetWithSpecAsync(ISpecifications<TEntity, Tkey> spec);
