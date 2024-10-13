@@ -14,10 +14,10 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 	public class ProductController(IServiceManager serviceManager) : ApiControllerBase
 	{
 		[HttpGet] //Get:/api/Products
-		public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string? sort) //this is like what we had read in the artical
+		public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string? sort,int? categoryId,int? brandId) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines
 		 {
-			var products = await serviceManager.ProductService.GetAllProductAsync(sort);
+			var products = await serviceManager.ProductService.GetAllProductAsync(sort,categoryId,brandId);
 			return Ok(products);
 		}	
 		

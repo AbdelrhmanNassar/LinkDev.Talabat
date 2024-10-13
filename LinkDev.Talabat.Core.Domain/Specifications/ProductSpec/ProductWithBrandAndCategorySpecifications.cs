@@ -12,46 +12,41 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.ProductSpec
     public class ProductWithBrandAndCategorySpecifications :BaseSpecifications<Product,int>
 
     {
-        public ProductWithBrandAndCategorySpecifications(string? sort):base()
-        {
-            AddOrderBy(p => p.Name);//by defualt will sort by name
-            // is sort has one of these value?
-            //okay change the sort behavior
+        public ProductWithBrandAndCategorySpecifications(string? sort, int? categoryId, int? brandId) :
+                    
+            base(p =>
+            (!brandId.HasValue || brandId.Value == p.BrandId)
+			  &&
+            (!categoryId.HasValue || categoryId.Value == p.CategoryId))
 
-            if (!string.IsNullOrEmpty(sort))
-            {
+        {
+
+			AddIncludes();
                 switch (sort) {
                     case "priceAsec":
 						AddOrderBy(P=>P.Price);
                         break;
 
                     case "priceDesc":
-                        AddOrderBy(null);//why? because i need only one of the (OrderBy - OrderByDesc) has value to decide who i will use
-										 //i do this because i add AddOrderBy(p => p.Name); before code and this is could cause
-									     //confusion because (OrderBy - OrderByDesc) may have value at same time
 						AddOrderByDesc(P => P.Price);
                         break;  
                     case "nameDesc":
-                        AddOrderBy(null);//why? because i need only one of the (OrderBy - OrderByDesc) has value to decide who i will use
 						AddOrderByDesc(P => P.Name);
                         break;
-
-                }
-            }
+                    default:
+						AddOrderBy(p => p.Name);
+                        break; }
         }
-        public ProductWithBrandAndCategorySpecifications():base()
-        {
-			Include();
-		}   
+         
         public ProductWithBrandAndCategorySpecifications(int id):base(id)
         {
-			Include();
+			AddIncludes();
 		}
 
 
-		private protected override void Include()
+		private protected override void AddIncludes()
 		{
-			base.Include();//in case is there is lookup
+			base.AddIncludes();//in case is there is lookup
             Includes.Add(P => P.ProductBrand!);
             Includes.Add(P => P.ProductCategory!);
         }

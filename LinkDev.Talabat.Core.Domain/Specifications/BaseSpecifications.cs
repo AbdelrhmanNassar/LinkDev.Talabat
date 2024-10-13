@@ -13,24 +13,24 @@ namespace LinkDev.Talabat.Core.Domain.NewFolder
 		where Tkey : IEquatable<Tkey>
 	{
 		//public Expression<Predicate<TEntity>> Criteria { get; set; } = null;
-		public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new ();
+		public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new List<Expression<Func<TEntity, object>>>();
 		public Expression<Func<TEntity, bool>>? Criteria { get ; set ; }
 		public Expression<Func<TEntity, object>>? OrderBy { get; set; } 
 		public Expression<Func<TEntity, object>>? OrderByDesc { get; set; }
 
-		public BaseSpecifications()
+		public BaseSpecifications(Expression<Func<TEntity, bool>> expression)
         {
 			//Criteria
-			Includes = new List<Expression<Func<TEntity, object>>> ();
+			Criteria = expression;
+
 		}
         public BaseSpecifications(Tkey id)
         {
 
 			Criteria = E => E.Id.Equals(id); 
-			Includes = new List<Expression<Func<TEntity, object>>>();
 		}
 
-		private protected virtual void  Include()
+		private protected virtual void  AddIncludes()
 		{
 
 		}

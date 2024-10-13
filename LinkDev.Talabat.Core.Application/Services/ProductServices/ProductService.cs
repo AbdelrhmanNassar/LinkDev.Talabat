@@ -24,9 +24,9 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task<IReadOnlyList<ProductToReturnDto>> GetAllProductAsync(string? sort)
+        public async Task<IReadOnlyList<ProductToReturnDto>> GetAllProductAsync(string? sort, int? categoryId, int? brandId)
         {
-            var spec = new ProductWithBrandAndCategorySpecifications(sort);
+            var spec = new ProductWithBrandAndCategorySpecifications(sort, categoryId, brandId);
             var products =  mapper.Map<IReadOnlyList<ProductToReturnDto>>(await unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec));
             return products;
 		}
