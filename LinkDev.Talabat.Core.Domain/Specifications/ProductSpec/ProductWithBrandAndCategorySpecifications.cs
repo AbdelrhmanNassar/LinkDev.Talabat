@@ -12,7 +12,7 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.ProductSpec
     public class ProductWithBrandAndCategorySpecifications :BaseSpecifications<Product,int>
 
     {
-        public ProductWithBrandAndCategorySpecifications(string? sort, int? categoryId, int? brandId) :
+        public ProductWithBrandAndCategorySpecifications(string? sort, int? categoryId, int? brandId,int PageSize,int PageIndex) :
                     
             base(p =>
             (!brandId.HasValue || brandId.Value == p.BrandId)
@@ -22,7 +22,8 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.ProductSpec
         {
 
 			AddIncludes();
-                switch (sort) {
+
+            switch (sort) {
                     case "priceAsec":
 						AddOrderBy(P=>P.Price);
                         break;
@@ -36,6 +37,11 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.ProductSpec
                     default:
 						AddOrderBy(p => p.Name);
                         break; }
+            ///total products 18
+            ///pagesize = 5
+            ///page index=3 which means i will skip 10 how?
+            ///18 /5 =3.6 Take the floor it will be 4 pages each page has 5 but i only have 18 so the forth has only three
+            AddPageination(PageSize * (PageIndex -1),PageSize );
         }
          
         public ProductWithBrandAndCategorySpecifications(int id):base(id)

@@ -16,5 +16,10 @@ namespace LinkDev.Talabat.Core.Domain.Contracts
 
         public Expression<Func<TEnitiy,object>> OrderBy { get; set; }
         public Expression<Func<TEnitiy,object>> OrderByDesc { get; set; }
-    }
+		public int Take { get; set; }
+		public int Skip { get; set; }
+		public bool EnablePagenation { get; set; } //false by defualt
+
+
+	}
 }

@@ -26,6 +26,10 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
 			else
 				query = query.OrderByDescending(specifications.OrderByDesc);
 
+			if(specifications.EnablePagenation is true)
+			query =	query.Skip(specifications.Skip).Take(specifications.Take);
+		 
+
 
 
 			query = specifications.Includes.Aggregate(query, (currentQuery, include) => currentQuery.Include(include));
