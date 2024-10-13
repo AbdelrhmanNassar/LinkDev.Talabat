@@ -32,6 +32,10 @@ namespace LinkDev.Talabat.Core.Domain.NewFolder
 
 			Criteria = E => E.Id.Equals(id);
 		}
+		//public BaseSpecifications()
+		//{
+
+		//}
 
 		private protected virtual void AddIncludes()
 		{

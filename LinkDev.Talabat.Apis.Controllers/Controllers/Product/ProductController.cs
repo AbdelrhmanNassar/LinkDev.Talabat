@@ -1,4 +1,5 @@
 ﻿using LinkDev.Talabat.Apis.Controllers.Controllers.Base;
+using LinkDev.Talabat.Core._Application.Abstraction.Comman;
 using LinkDev.Talabat.Core._Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.ServiceManager;
@@ -15,7 +16,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 	public class ProductController(IServiceManager serviceManager) : ApiControllerBase
 	{
 		[HttpGet] //Get:/api/Products
-		public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecificationParams specParams) //this is like what we had read in the artical
+		public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecificationParams specParams) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines
 		 {
 			var products = await serviceManager.ProductService.GetAllProductAsync(specParams);

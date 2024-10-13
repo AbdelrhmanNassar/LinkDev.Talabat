@@ -63,5 +63,10 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
 			return await SpecificationsEvaluator<TEnitity, Tkey>.GetQuery(storeContext.Set<TEnitity>(), spec).FirstOrDefaultAsync()
 				 ;
 		}
+
+		public async Task<int> GetCountAsync(ISpecifications<TEnitity, Tkey> specifications)
+		{
+			 return await SpecificationsEvaluator<TEnitity, Tkey>.GetQuery(storeContext.Set<TEnitity>(), specifications).CountAsync();
+		}
 	}
 }
