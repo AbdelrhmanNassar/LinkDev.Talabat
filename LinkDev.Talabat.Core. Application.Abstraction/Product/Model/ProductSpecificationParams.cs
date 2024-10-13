@@ -13,7 +13,16 @@ namespace LinkDev.Talabat.Core._Application.Abstraction.Product.Model
 		public string? Sort { get; set; }
 		public int PageIndex { get; set; }
 
-	
+		private string? search;
+
+		public string Search
+
+		{
+			get { return search; }
+			set { search = value.ToUpper(); }
+		}
+
+
 
 		private int maxSize = 10;
 		private int pageSize = 1;

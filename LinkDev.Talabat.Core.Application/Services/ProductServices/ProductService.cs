@@ -28,9 +28,9 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
         }
         public async Task<Pagination<ProductToReturnDto>> GetAllProductAsync(ProductSpecificationParams specParams)
         {
-            var spec = new ProductWithBrandAndCategorySpecifications(specParams.Sort,specParams.CategoryId,specParams.BrandId,specParams.PageSize,specParams.PageIndex);
+            var spec = new ProductWithBrandAndCategorySpecifications(specParams.Sort, specParams.CategoryId, specParams.BrandId, specParams.PageSize, specParams.PageIndex, specParams.Search);
             var products =  mapper.Map<IReadOnlyList<ProductToReturnDto>>(await unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec));
-            var countSpec = new ProductWithFiltrationForCountSpecification(specParams.BrandId,specParams.CategoryId);
+            var countSpec = new ProductWithFiltrationForCountSpecification(specParams.BrandId,specParams.CategoryId,specParams.Search);
 
 			var count = await unitOfWork.GetRepository<Product,int>().GetCountAsync(countSpec) ;
             return new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize,products,count );

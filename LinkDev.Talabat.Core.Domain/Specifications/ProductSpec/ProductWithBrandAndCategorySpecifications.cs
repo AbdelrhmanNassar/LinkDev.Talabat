@@ -12,9 +12,12 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.ProductSpec
     public class ProductWithBrandAndCategorySpecifications :BaseSpecifications<Product,int>
 
     {
-        public ProductWithBrandAndCategorySpecifications(string? sort, int? categoryId, int? brandId,int PageSize,int PageIndex) :
+        public ProductWithBrandAndCategorySpecifications(string? sort, int? categoryId, int? brandId,int PageSize,int PageIndex,string? search) :
                     
             base(p =>
+            (string.IsNullOrEmpty(search) || p.NormalizedName.Contains( search ) )
+            &&
+
             (!brandId.HasValue || brandId.Value == p.BrandId)
 			  &&
             (!categoryId.HasValue || categoryId.Value == p.CategoryId))

@@ -27,12 +27,15 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
 				query = query.OrderBy(specifications.OrderBy);
 
 			if (specifications.EnablePagenation is true)
-			query =	query.Skip(specifications.Skip).Take(specifications.Take);
-		 
+			{
+				var skipValue = (specifications.Skip) < 0 ? 0 : specifications.Skip;
+				query = query.Skip(skipValue).Take(specifications.Take);
+			}
 
 
 
-			query = specifications.Includes.Aggregate(query, (currentQuery, include) => currentQuery.Include(include));
+
+		query = specifications.Includes.Aggregate(query, (currentQuery, include) => currentQuery.Include(include));
 
 			return query;
 		}
