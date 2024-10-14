@@ -74,7 +74,8 @@ namespace LinkDev.Talabat.Api
 			app.MapControllers();//to use the route attriute in every controller means  each controller annotated as[ApiController]
 								//
 		 //app.MapControllerRoute()//for mvc
-
+			app.UseAuthentication();
+			app.UseAuthorization();
 			#endregion
 			app.UseStaticFiles();
 			app.Run();
