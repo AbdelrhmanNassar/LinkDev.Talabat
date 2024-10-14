@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using LinkDev.Talabat.Core._Application.Abstraction.Comman;
+using LinkDev.Talabat.Core._Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.Product;
 using LinkDev.Talabat.Core.Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
@@ -24,33 +26,33 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task<IEnumerable<ProductToReturnDto>> GetAllProductAsync()
+        public async Task<Pagination<ProductToReturnDto>> GetAllProductAsync(ProductSpecificationParams specParams)
         {
-            var spec = new ProductWithBrandAndCategorySpecifications();
-            var products =  mapper.Map<IEnumerable<ProductToReturnDto>>(await unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec));
-            return products;
+            var spec = new ProductWithBrandAndCategorySpecifications(specParams.Sort, specParams.CategoryId, specParams.BrandId, specParams.PageSize, specParams.PageIndex, specParams.Search);
+            var products =  mapper.Map<IReadOnlyList<ProductToReturnDto>>(await unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec));
+            var countSpec = new ProductWithFiltrationForCountSpecification(specParams.BrandId,specParams.CategoryId,specParams.Search);
+
+			var count = await unitOfWork.GetRepository<Product,int>().GetCountAsync(countSpec) ;
+            return new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize,products,count );
 		}
-       
-
-
 
         public async Task<ProductToReturnDto> GetProductAsync(int id)
-{
+            {
 
 			var spec = new ProductWithBrandAndCategorySpecifications(id);
 			var product = mapper.Map<ProductToReturnDto>(await unitOfWork.GetRepository<Product, int>().GetWithSpecAsync(spec));
 			return product;
 		}
 
-        public async Task<IEnumerable<BrandDto>> GetBrandsAsync()
+        public async Task<IReadOnlyList<BrandDto>> GetBrandsAsync()
         {
-            return mapper.Map<IEnumerable<BrandDto>>(await unitOfWork.GetRepository<ProductBrand, int>().GetAllAsync());
+            return mapper.Map<IReadOnlyList<BrandDto>>(await unitOfWork.GetRepository<ProductBrand, int>().GetAllAsync());
 
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
+        public async Task<IReadOnlyList<CategoryDto>> GetCategoriesAsync()
         {
-            return mapper.Map<IEnumerable<CategoryDto>>(await unitOfWork.GetRepository<ProductCategory, int>().GetAllAsync());
+            return mapper.Map<IReadOnlyList<CategoryDto>>(await unitOfWork.GetRepository<ProductCategory, int>().GetAllAsync());
         }
 
 

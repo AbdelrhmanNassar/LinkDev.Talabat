@@ -21,8 +21,21 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
 			{
 				query = query.Where(specifications.Criteria);
 			}
+			if (specifications.OrderByDesc is not null)
+				query = query.OrderByDescending(specifications.OrderByDesc);
+			else if (specifications.OrderBy is not null)
+				query = query.OrderBy(specifications.OrderBy);
 
-			query = specifications.Includes.Aggregate(query, (currentQuery, include) => currentQuery.Include(include));
+			if (specifications.EnablePagenation is true)
+			{
+				var skipValue = (specifications.Skip) < 0 ? 0 : specifications.Skip;
+				query = query.Skip(skipValue).Take(specifications.Take);
+			}
+
+
+
+
+		query = specifications.Includes.Aggregate(query, (currentQuery, include) => currentQuery.Include(include));
 
 			return query;
 		}
