@@ -1,5 +1,6 @@
 ﻿using LinkDev.Talabat.Apis.Controllers.Controllers.Base;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
+using LinkDev.Talabat.Apis.Controllers.Controllers.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -24,8 +25,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 		[HttpGet("NotFound")]
 		public IActionResult GetNotFound()// api/Buggy/NotFound 
 		{
-
-			return NotFound(new ApiResponse(statusCode:404)); //=> 404 
+			throw new NotFoundException();//=> 404 
 		}
 		[HttpGet("badrequest")] // api/Buggy/badreqeust 
 		public IActionResult GetBadRequst()

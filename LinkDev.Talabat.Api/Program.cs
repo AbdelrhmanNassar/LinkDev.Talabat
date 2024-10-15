@@ -8,6 +8,7 @@ using LinkDev.Talabat.Infrastructure.Peresistance;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
+using LinkDev.Talabat.Apis.MiddleWares;
 
 namespace LinkDev.Talabat.Api
 {
@@ -88,8 +89,9 @@ namespace LinkDev.Talabat.Api
 				app.UseSwagger();
 				app.UseSwaggerUI();
 				//internally theses method was need thier method so i register the serivces for them to di container
+				app.UseDeveloperExceptionPage();
 			}
-
+			app.UseMiddleware<CustomeExpceptionHandlerMiddleWare>();
 			app.UseHttpsRedirection();//if you enable https so
 									  //any request form http it will redirect to https beacause by defualt request being
 									  //http so this will  redirect to https using his security certificate
