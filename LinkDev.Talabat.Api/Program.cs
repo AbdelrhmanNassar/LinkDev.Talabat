@@ -99,7 +99,7 @@ namespace LinkDev.Talabat.Api
 
 			//			app.UseAuthorization();
 
-			app.UseStatusCodePagesWithReExecute("/Error/{0}")
+			app.UseStatusCodePagesWithReExecute("/Error/{0}");
 			app.MapControllers();//to use the route attriute in every controller means  each controller annotated as[ApiController]
 								//
 		 //app.MapControllerRoute()//for mvc
