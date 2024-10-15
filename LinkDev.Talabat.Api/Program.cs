@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using LinkDev.Talabat.Apis.MiddleWares;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure;
 
 namespace LinkDev.Talabat.Api
 {
@@ -38,7 +39,7 @@ namespace LinkDev.Talabat.Api
 					};
 				}).AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
 																			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
+			webAppilcationBuilder.Services.AddInfrastrctureServices(webAppilcationBuilder.Configuration);
 			#region Also for configre ApiBehaviorOptions in other way
 			//webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options => {
 			//		options.SuppressModelStateInvalidFilter = true;
