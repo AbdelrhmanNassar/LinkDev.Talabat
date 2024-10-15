@@ -2,6 +2,7 @@
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,19 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 		[HttpGet("validationError/{id}")] // api/Buggy/Forbidden 
 		public IActionResult GetValidationError(int id)//=> 400
 		{
-			return Ok(); 
+			if (!ModelState.IsValid) {
+				var erros = ModelState.Where(m => m.Value.Errors.Count > 0)
+									 .ToDictionary(kv => 
+									 kv.Key, kv => kv.Value.Errors.Select(e=>e.ErrorMessage).ToList());
+	
+				return BadRequest(new ValidationApiResponse() { Errors = erros });
+			}
+				//ModelState.
+				//return BadRequest(new ApiResponse(400));
+			
+					
+
+			return BadRequest();
 		}
 
 

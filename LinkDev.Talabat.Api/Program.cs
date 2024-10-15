@@ -5,6 +5,9 @@ using LinkDev.Talabat.Apis.Controllers.Controllers;
 using LinkDev.Talabat.Core.Application.Abstraction;
 using LinkDev.Talabat.Core.Application;
 using LinkDev.Talabat.Infrastructure.Peresistance;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 
 namespace LinkDev.Talabat.Api
 {
@@ -12,18 +15,42 @@ namespace LinkDev.Talabat.Api
 	{
 		//[FromServices]
 		//public static StoreContext StoreContext { get; set;}
-        public static   async Task Main(string[] args)
+		public static async Task Main(string[] args)
 		{
 			var webAppilcationBuilder = WebApplication.CreateBuilder(args);
-			
+
 			// Add services to the container.
 			//services is the di container
 			#region Configure Services
 			// Adds services for controllers only to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection  .This method will not
 			/// register services used for views or pages.
 			webAppilcationBuilder.Services.AddControllers().
-				AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
-														// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+				ConfigureApiBehaviorOptions(options => {
+					options.SuppressModelStateInvalidFilter = false;
+					options.InvalidModelStateResponseFactory = (ActionContext) =>
+					{
+						var erros = ActionContext.ModelState.Where(m => m.Value!.Errors.Count > 0)
+									 .ToDictionary(kv =>
+									 kv.Key, kv => kv.Value!.Errors.Select(e => e.ErrorMessage).ToList());
+						return new BadRequestObjectResult(new ValidationApiResponse() { Errors = erros });
+
+					};
+				}).AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
+																			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+			#region Also for configre ApiBehaviorOptions in other way
+			//webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options => {
+			//		options.SuppressModelStateInvalidFilter = true;
+			//		options.InvalidModelStateResponseFactory = (ActionContext) =>
+			//		{
+			//			var erros = ActionContext.ModelState.Where(m => m.Value!.Errors.Count > 0)
+			//						 .ToDictionary(kv =>
+			//						 kv.Key, kv => kv.Value!.Errors.Select(e => e.ErrorMessage).ToList());
+			//			return new BadRequestObjectResult(new ValidationApiResponse() { Errors = erros });
+
+			//		};
+			//	}); 
+			#endregion
 			webAppilcationBuilder.Services.AddEndpointsApiExplorer();
 			webAppilcationBuilder.Services.AddSwaggerGen();
 			webAppilcationBuilder.Services.AddHttpContextAccessor();
