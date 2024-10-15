@@ -1,14 +1,7 @@
 ﻿using LinkDev.Talabat.Apis.Controllers.Controllers.Base;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
-using LinkDev.Talabat.Apis.Controllers.Controllers.Exceptions;
-using Microsoft.AspNetCore.Authorization;
+using LinkDev.Talabat.Core.Application.Abstraction;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 {

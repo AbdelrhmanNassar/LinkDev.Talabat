@@ -1,11 +1,6 @@
 ﻿using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
-using LinkDev.Talabat.Apis.Controllers.Controllers.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using LinkDev.Talabat.Core.Application.Abstraction;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Apis.MiddleWares
 {
