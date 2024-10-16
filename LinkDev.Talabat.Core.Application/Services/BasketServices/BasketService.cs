@@ -2,6 +2,7 @@
 using LinkDev.Talabat.Core._Application.Abstraction.Basket;
 using LinkDev.Talabat.Core._Application.Abstraction.Basket.Mdoels;
 using LinkDev.Talabat.Core.Application.Abstraction;
+using LinkDev.Talabat.Core.Application.Exceptions;
 using LinkDev.Talabat.Core.Domain.Contracts.Infrastrcutre;
 using LinkDev.Talabat.Core.Domain.Enities.Basket;
 using Microsoft.Extensions.Configuration;
@@ -17,9 +18,9 @@ namespace LinkDev.Talabat.Core.Application.Services.BasketServices
 	{
 		public async Task DeleteCustomerBasketAsync(string id)
 		{
-			var deleted =basketRepository.DeleteAsync(id);
-			//if(deleted is null)
-				// throw new BadRequestExeption("unable to delete this");
+			var deleted = await basketRepository.DeleteAsync(id);
+			if(deleted is false)
+				 throw new BadRequestException("unable to delete this");
 				
 		}
 
@@ -28,8 +29,8 @@ namespace LinkDev.Talabat.Core.Application.Services.BasketServices
 			var basket = await basketRepository.GetAsync(id);
 
 			if (basket == null)
-				//throw new NotFoundException(nameof(CustomerBasket),id);
-				throw new NotFoundException();
+				throw new NotFoundException(nameof(CustomerBasket),id);
+			
 
 			return mapper.Map<CustomerBusketDto?>(basket);
 
@@ -40,8 +41,8 @@ namespace LinkDev.Talabat.Core.Application.Services.BasketServices
 			var customerBasket = mapper.Map<CustomerBasket>(basketDto);
 			var timeToLive = TimeSpan.FromDays(double.Parse(configuration.GetSection("RedisSetting")["TimeToLiveInDays"]!));
 			var updatedBasket = await basketRepository.UpdateAsync(customerBasket, timeToLive);
-			//if (updatedBasket == null)
-				//throw new BadRequestExeption("can't update there is a problem with this basckt");
+			if (updatedBasket == null)
+				throw new BadRequestException("can't update there is a problem with this basckt");
 				return basketDto;
 		}
 	}

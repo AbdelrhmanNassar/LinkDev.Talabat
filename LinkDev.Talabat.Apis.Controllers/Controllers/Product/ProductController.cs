@@ -29,8 +29,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 			//i want the the api  be  at most 2 lines
 		{
 			var product = await serviceManager.ProductService.GetProductAsync(id);
-			if (product == null) 
-				return NotFound(new ApiResponse(404,$"The Product With Id:{id} Is Not Found."));
+
 			return Ok(product);
 		}
 

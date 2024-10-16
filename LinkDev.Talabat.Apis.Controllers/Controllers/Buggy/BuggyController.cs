@@ -16,9 +16,11 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 			throw new Exception(); //=> 500 
 		}
 		[HttpGet("NotFound")]
-		public IActionResult GetNotFound()// api/Buggy/NotFound 
+		public IActionResult GetNotFoundError()// api/Buggy/NotFound 
 		{
-			throw new NotFoundException();//=> 404 
+			//throw new NotFoundException();//=> 404 
+			//throw new NotFoundException();//=> 404 
+			return NotFound();
 		}
 		[HttpGet("badrequest")] // api/Buggy/badreqeust 
 		public IActionResult GetBadRequst()
@@ -40,11 +42,11 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 		public IActionResult GetValidationError(int id)//=> 400
 		{
 			if (!ModelState.IsValid) {
-				var erros = ModelState.Where(m => m.Value.Errors.Count > 0)
-									 .ToDictionary(kv => 
-									 kv.Key, kv => kv.Value.Errors.Select(e=>e.ErrorMessage).ToList());
+				//var erros = ModelState.Where(m => m.Value.Errors.Count > 0)
+				//					 .ToDictionary(kv => 
+				//					 kv.Key, kv => kv.Value.Errors.Select(e=>e.ErrorMessage).ToList());
 	
-				return BadRequest(new ValidationApiResponse() { Errors = erros });
+				//return BadRequest(new ValidationApiResponse() { Errors = erros });
 			}
 				//ModelState.
 				//return BadRequest(new ApiResponse(400));

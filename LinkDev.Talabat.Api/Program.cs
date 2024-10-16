@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using LinkDev.Talabat.Apis.MiddleWares;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LinkDev.Talabat.Api
 {
@@ -31,10 +32,22 @@ namespace LinkDev.Talabat.Api
 					options.SuppressModelStateInvalidFilter = false;
 					options.InvalidModelStateResponseFactory = (ActionContext) =>
 					{
-						var erros = ActionContext.ModelState.Where(m => m.Value!.Errors.Count > 0)
-									 .ToDictionary(kv =>
-									 kv.Key, kv => kv.Value!.Errors.Select(e => e.ErrorMessage).ToList());
-						return new BadRequestObjectResult(new ValidationApiResponse() { Errors = erros });
+						#region You could do this
+						//var erros = ActionContext.ModelState.Where(m => m.Value!.Errors.Count > 0)
+						//					 .ToDictionary(kv =>
+						//					 kv.Key, kv => kv.Value!.Errors.Select(e => e.ErrorMessage).ToList());
+						//return new BadRequestObjectResult(new ValidationApiResponse() { Errors = erros }); 
+						#endregion
+
+						#region Or this
+						var errors = ActionContext.ModelState.Where(e => e.Value!.Errors.Count > 0)
+						.Select(e => new ValidationApiResponse.ValidationError()
+						{
+							Field = e.Key,
+							Erros = e.Value!.Errors.Select(e => e.ErrorMessage)
+						});
+						return new BadRequestObjectResult(new ValidationApiResponse() { Errors = errors });
+						#endregion
 
 					};
 				}).AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
@@ -92,7 +105,7 @@ namespace LinkDev.Talabat.Api
 				//internally theses method was need thier method so i register the serivces for them to di container
 				app.UseDeveloperExceptionPage();
 			}
-			app.UseMiddleware<CustomeExpceptionHandlerMiddleWare>();
+			app.UseMiddleware<ExpceptionHandlerMiddleWare>();
 			app.UseHttpsRedirection();//if you enable https so
 									  //any request form http it will redirect to https beacause by defualt request being
 									  //http so this will  redirect to https using his security certificate

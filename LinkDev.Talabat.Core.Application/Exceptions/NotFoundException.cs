@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Core.Application.Abstraction
+namespace LinkDev.Talabat.Core.Application.Exceptions
 {
 	public class NotFoundException :ApplicationException
 	{
-        public NotFoundException():base("NotFound Exception")
+        public NotFoundException(string name,object key):base($"{name} with ({key}) Is Not Found.")
         {
             
         }
