@@ -3,6 +3,7 @@ using LinkDev.Talabat.Core._Application.Abstraction.Comman;
 using LinkDev.Talabat.Core._Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.Product;
 using LinkDev.Talabat.Core.Application.Abstraction.Product.Model;
+using LinkDev.Talabat.Core.Application.Exceptions;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Core.Domain.NewFolder;
@@ -40,8 +41,11 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
             {
 
 			var spec = new ProductWithBrandAndCategorySpecifications(id);
-			var product = mapper.Map<ProductToReturnDto>(await unitOfWork.GetRepository<Product, int>().GetWithSpecAsync(spec));
-			return product;
+            var product = await unitOfWork.GetRepository<Product, int>().GetWithSpecAsync(spec);
+			var productDto = mapper.Map<ProductToReturnDto>(product);
+            if (productDto is null)
+                throw new NotFoundException(nameof(Product), id);
+			return productDto;
 		}
 
         public async Task<IReadOnlyList<BrandDto>> GetBrandsAsync()

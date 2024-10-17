@@ -1,4 +1,5 @@
 ﻿using LinkDev.Talabat.Apis.Controllers.Controllers.Base;
+using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using LinkDev.Talabat.Core._Application.Abstraction.Comman;
 using LinkDev.Talabat.Core._Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.Product.Model;
@@ -28,8 +29,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 			//i want the the api  be  at most 2 lines
 		{
 			var product = await serviceManager.ProductService.GetProductAsync(id);
-			if (product == null) 
-				return NotFound();
+
 			return Ok(product);
 		}
 
@@ -37,8 +37,8 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 		public async Task<ActionResult<IReadOnlyList<BrandDto>>> GetBrands()
 		{
 			var res = await serviceManager.ProductService.GetBrandsAsync();
-			if (res == null)
-				return NotFound();
+			//if (res == null)
+			//	return NotFound();
 			return Ok(res);
 
 		}
@@ -47,8 +47,8 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 		public async Task<ActionResult<IReadOnlyList<CategoryDto>>> GetCategories()
 		{
 			var res = await serviceManager.ProductService.GetCategoriesAsync();
-			if (res == null)
-				return NotFound();
+			//if (res == null)
+			//	return NotFound();
 			return Ok(res);
 
 		}
