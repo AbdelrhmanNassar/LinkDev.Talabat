@@ -2,19 +2,17 @@
 using LinkDev.Talabat.Api.Extensions;
 using LinkDev.Talabat.Api.Services;
 using LinkDev.Talabat.Apis.Controllers.Controllers;
-using LinkDev.Talabat.Core.Application.Abstraction;
-using LinkDev.Talabat.Core.Application;
-using LinkDev.Talabat.Infrastructure.Peresistance;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Mvc;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
-using LinkDev.Talabat.Apis.MiddleWares;
+using LinkDev.Talabat.Core.Application;
+using LinkDev.Talabat.Core.Application.Abstraction;
+using LinkDev.Talabat.Infrastructure.Peresistance;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using LinkDev.Talabat.Apis.MiddleWares;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.Api
 {
-    public class Program
+	public class Program
 	{
 		//[FromServices]
 		//public static StoreContext StoreContext { get; set;}
@@ -27,8 +25,9 @@ namespace LinkDev.Talabat.Api
 			#region Configure Services
 			// Adds services for controllers only to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection  .This method will not
 			/// register services used for views or pages.
-			webAppilcationBuilder.Services.AddControllers().
-				ConfigureApiBehaviorOptions(options => {
+			webAppilcationBuilder.Services.AddControllers()
+				.ConfigureApiBehaviorOptions(options =>
+				{
 					options.SuppressModelStateInvalidFilter = false;
 					options.InvalidModelStateResponseFactory = (ActionContext) =>
 					{
@@ -50,8 +49,26 @@ namespace LinkDev.Talabat.Api
 						#endregion
 
 					};
-				}).AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
+				})
+	.AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
 																			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+		//webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options =>
+		//{
+		//	options.InvalidModelStateResponseFactory = (actionContext) =>
+		//	{
+
+		//		var errors = actionContext.ModelState.Where(e => e.Value!.Errors.Count > 0)
+		//				.Select(e => new ValidationApiResponse.ValidationError()
+		//				{
+		//					Field = e.Key,
+		//					Erros = e.Value!.Errors.Select(e => e.ErrorMessage)
+		//				});
+		//		return new BadRequestObjectResult(new ValidationApiResponse() { Errors = errors });
+		//	};
+
+		//});
+			
+			
 			webAppilcationBuilder.Services.AddInfrastrctureServices(webAppilcationBuilder.Configuration);
 			#region Also for configre ApiBehaviorOptions in other way
 			//webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options => {
@@ -113,7 +130,7 @@ namespace LinkDev.Talabat.Api
 
 			//			app.UseAuthorization();
 
-			app.UseStatusCodePagesWithReExecute("/Error/{0}");
+			app.UseStatusCodePagesWithRedirects("/Error/{0}");
 			app.MapControllers();//to use the route attriute in every controller means  each controller annotated as[ApiController]
 								//
 		 //app.MapControllerRoute()//for mvc

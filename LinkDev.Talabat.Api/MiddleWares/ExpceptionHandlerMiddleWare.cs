@@ -6,7 +6,8 @@ using System.Net;
 
 namespace LinkDev.Talabat.Apis.MiddleWares
 {
-	internal class ExpceptionHandlerMiddleWare
+	//Convention based
+	public class ExpceptionHandlerMiddleWare
 	{
 		private readonly RequestDelegate next;
 		private readonly ILogger<ExpceptionHandlerMiddleWare> logger;
@@ -25,12 +26,15 @@ namespace LinkDev.Talabat.Apis.MiddleWares
 		{
 			try
 			{
+				//logic Before Next
 				await next(httpContext);
-				if(httpContext.Response.StatusCode == (int)HttpStatusCode.NotFound)
+				//Logic After Next
+				if (httpContext.Response.StatusCode == (int)HttpStatusCode.NotFound)
 				{
 					var response = new ApiResponse((int)HttpStatusCode.NotFound,$"the requested endpoint{httpContext.Request.Path} is not found" );
 					httpContext.Response.WriteAsync(response.ToString());
 				}
+
 			}
 			catch (Exception ex)
 			{
@@ -57,6 +61,7 @@ namespace LinkDev.Talabat.Apis.MiddleWares
 			{
 
 				case NotFoundException:
+			
 					httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
 					httpContext.Response.ContentType = "application/json";
 					response = new ApiResponse(404, ex.Message);

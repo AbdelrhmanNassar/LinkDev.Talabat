@@ -1,7 +1,9 @@
 ﻿using LinkDev.Talabat.Apis.Controllers.Controllers.Base;
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using LinkDev.Talabat.Core.Application.Abstraction;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 {
@@ -13,6 +15,16 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Buggy
 		[HttpGet("servererror")] // api/Buggy/servererror 
 		public IActionResult GetServerError()
 		{
+			//try
+			//{
+			//	throw new Exception();
+			//}
+			//catch (Exception ex) {
+			//	var response = new ApiResponse(500);
+			//	Response.WriteAsync(JsonSerializer.Serialize(Response.)); //write on the body of response 
+			//	return StatusCode(500);
+			//}
+
 			throw new Exception(); //=> 500 
 		}
 		[HttpGet("NotFound")]
