@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Base
+namespace LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Base
 {
 	public class BaseEnitiyConfigurations<TEntity,Tkey> : IEntityTypeConfiguration<TEntity>
 		where TEntity : BaseEntity<Tkey>

@@ -1,6 +1,7 @@
 ﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
-using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
+using LinkDev.Talabat.Infrastructure.Peresistance._Common;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic; 
@@ -9,18 +10,13 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Infrastructure.Peresistance.Data
+namespace LinkDev.Talabat.Infrastructure.Peresistance._Date
 {
-    internal class StoreContextInitialzer(StoreContext context) : IStoreContextInitialzer
+    internal sealed class StoreDbContextInitialzer(StoreDbContext context) : DbContextInitializer(context),IStoreContextInitialzer
 	{
-		public async Task Inialize()
-		{
-			var pendingMigrations = context.Database.GetPendingMigrations();
-			if (pendingMigrations.Any())
-				await context.Database.MigrateAsync();
-		}
+	
 
-		public async Task Seed()
+		public override async Task SeedAsync()
 		{
 			if (!context.Brands.Any())
 			{

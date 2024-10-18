@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Contracts.Persistance
 {
-    public interface IStoreContextInitialzer :IDbContextIntializer
-    {
-    }
+	public interface IStoreIdentityInitailzer :IDbContextIntializer
+	{
+	}
 }

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Enities.Identity
 {
-	internal class ApplicationUser : IdentityUser<int>  //key will be string
+	public class ApplicationUser : IdentityUser<string>  //key will be string
 	{
         public required string DisplayName { get; set; }
-        public Address? Address { get; set; }
+        public virtual Address? Address { get; set; }
 
     }
 }

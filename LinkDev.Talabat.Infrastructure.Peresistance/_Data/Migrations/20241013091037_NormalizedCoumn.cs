@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Migrations
+namespace LinkDev.Talabat.Infrastructure.Peresistance._Data.Migrations
 {
     /// <inheritdoc />
     public partial class NormalizedCoumn : Migration

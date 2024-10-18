@@ -1,6 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Comman;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
-using LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Base;
+using LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Product
+namespace LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Product
 {
 	internal class CategoryConfiguration :BaseAuditableEnitityConfigurations<ProductCategory,int>
 	{

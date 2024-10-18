@@ -1,8 +1,8 @@
-﻿using LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Base;
+﻿using LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace LinkDev.Talabat.Infrastructure.Peresistance.Data.Configrations.Product
+namespace LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Product
 {
 	public class ProductConfigurations : BaseAuditableEnitityConfigurations<LinkDev.Talabat.Core.Domain.Enities.Product.Product,int>
 	{
