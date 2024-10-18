@@ -4,6 +4,8 @@ using LinkDev.Talabat.Core._Application.Abstraction.Comman;
 using LinkDev.Talabat.Core._Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.Product.Model;
 using LinkDev.Talabat.Core.Application.Abstraction.ServiceManager;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,15 +18,18 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 	[ApiController]
 	public class ProductController(IServiceManager serviceManager) : ApiControllerBase
 	{
+		//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		[HttpGet] //Get:/api/Products
 		public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecificationParams specParams) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines
 		 {
 			var products = await serviceManager.ProductService.GetAllProductAsync(specParams);
 			return Ok(products);
-		}	
-		
+		}
+
+		//[Authorize(AuthenticationSchemes = "Bearer")]
 		[HttpGet("{id}")] //Get:/api/Products/id
+
 		public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProduct(int id) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines
 		{
