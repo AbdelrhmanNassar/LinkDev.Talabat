@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using LinkDev.Talabat.Core.Domain.Enities.Identity;
 using LinkDev.Talabat.Infrastructure.Peresistance.Identity;
+using LinkDev.Talabat.Core.Application.Services.Auth;
 
 namespace LinkDev.Talabat.Api
 {
@@ -89,7 +90,7 @@ namespace LinkDev.Talabat.Api
 			webAppilcationBuilder.Services.AddEndpointsApiExplorer();
 			webAppilcationBuilder.Services.AddSwaggerGen();
 			webAppilcationBuilder.Services.AddHttpContextAccessor();
-
+			
 
 			//webAppilcationBuilder.Services.AddDbContext<StoreContext>(optionsBuilder =>
 			//{
@@ -104,24 +105,7 @@ namespace LinkDev.Talabat.Api
 		    webAppilcationBuilder.Services.AddApplicationServices();
 			//webAppilcationBuilder.Services.AddScoped(typeof(UserManager<ApplicationUser>)); Wrong way for regisiteration this 
 			//webAppilcationBuilder.Services.AddIdentity<ApplicationUser, IdentityRole>();
-			webAppilcationBuilder.Services.AddIdentity<ApplicationUser, IdentityRole>((IdentityOptions) => {
-				IdentityOptions.SignIn.RequireConfirmedAccount = true;
-				IdentityOptions.SignIn.RequireConfirmedEmail = true;
-				IdentityOptions.SignIn.RequireConfirmedPhoneNumber = true;
-
-				IdentityOptions.Password.RequireNonAlphanumeric = true;//@#$%&
-				//And More
-				IdentityOptions.User.RequireUniqueEmail = true;//Validation
-				IdentityOptions.User.AllowedUserNameCharacters = "adbqwerty 123"; //allow only this chars to be user name
-		
-
-				IdentityOptions.Lockout.AllowedForNewUsers = true;
-				IdentityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(12);
-				IdentityOptions.Lockout.MaxFailedAccessAttempts = 5;
-
-				
-				})
-				.AddEntityFrameworkStores<StoreIdentityDbContext>();
+			webAppilcationBuilder.Services.AddIdentityServices(webAppilcationBuilder.Configuration);
 			#endregion
 
 			var app = webAppilcationBuilder.Build();//build web application
