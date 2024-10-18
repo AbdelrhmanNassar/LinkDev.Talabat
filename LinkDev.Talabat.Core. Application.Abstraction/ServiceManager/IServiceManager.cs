@@ -1,4 +1,5 @@
-﻿using LinkDev.Talabat.Core._Application.Abstraction.Basket;
+﻿using LinkDev.Talabat.Core._Application.Abstraction.Auth;
+using LinkDev.Talabat.Core._Application.Abstraction.Basket;
 using LinkDev.Talabat.Core.Application.Abstraction.Product;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.ServiceManager
 	{
 		public IProductService ProductService { get; }
 		public IBasketService BasketService { get; }
+
+		public IAuthService AuthService { get; }
 
 
 

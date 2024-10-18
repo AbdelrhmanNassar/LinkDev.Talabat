@@ -27,11 +27,11 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
 		{
 			var user = await userManager.FindByEmailAsync(model.Email);
 			if (user is null)
-				throw new BadRequestException("Invalid Login");
+				throw new UnAuthorizedException("Invalid Login");
 			var result = await signInManager.CheckPasswordSignInAsync(user ,model.Password, true);
 
 			if(!result.Succeeded)
-				throw new BadRequestException("Invalid Login");
+				throw new UnAuthorizedException("Invalid Login");
 
 			var response = new UserDto() { 
 				DisplayName=user.DisplayName,
@@ -47,6 +47,7 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
 		{
 			var user = new ApplicationUser()
 			{
+				Id = Guid.NewGuid().ToString(),
 				DisplayName = model.DisplayName,
 				Email = model.Email,
 				UserName = model.UserName,
