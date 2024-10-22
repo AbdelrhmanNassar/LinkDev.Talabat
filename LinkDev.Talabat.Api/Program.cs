@@ -55,41 +55,43 @@ namespace LinkDev.Talabat.Api
 					};
 				})
 	.AddApplicationPart(typeof(AssemblyInformation).Assembly);//register required serivce of webapi to di container to work with it 
-																			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-		//webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options =>
-		//{
-		//	options.InvalidModelStateResponseFactory = (actionContext) =>
-		//	{
+                                                              // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+                                                              //webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options =>
+                                                              //{
+                                                              //	options.InvalidModelStateResponseFactory = (actionContext) =>
+                                                              //	{
 
-		//		var errors = actionContext.ModelState.Where(e => e.Value!.Errors.Count > 0)
-		//				.Select(e => new ValidationApiResponse.ValidationError()
-		//				{
-		//					Field = e.Key,
-		//					Erros = e.Value!.Errors.Select(e => e.ErrorMessage)
-		//				});
-		//		return new BadRequestObjectResult(new ValidationApiResponse() { Errors = errors });
-		//	};
+            //		var errors = actionContext.ModelState.Where(e => e.Value!.Errors.Count > 0)
+            //				.Select(e => new ValidationApiResponse.ValidationError()
+            //				{
+            //					Field = e.Key,
+            //					Erros = e.Value!.Errors.Select(e => e.ErrorMessage)
+            //				});
+            //		return new BadRequestObjectResult(new ValidationApiResponse() { Errors = errors });
+            //	};
 
-		//});
-			
-			
-			webAppilcationBuilder.Services.AddInfrastrctureServices(webAppilcationBuilder.Configuration);
-			#region Also for configre ApiBehaviorOptions in other way
-			//webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options => {
-			//		options.SuppressModelStateInvalidFilter = true;
-			//		options.InvalidModelStateResponseFactory = (ActionContext) =>
-			//		{
-			//			var erros = ActionContext.ModelState.Where(m => m.Value!.Errors.Count > 0)
-			//						 .ToDictionary(kv =>
-			//						 kv.Key, kv => kv.Value!.Errors.Select(e => e.ErrorMessage).ToList());
-			//			return new BadRequestObjectResult(new ValidationApiResponse() { Errors = erros });
+            //});
 
-			//		};
-			//	}); 
-			#endregion
-			webAppilcationBuilder.Services.AddEndpointsApiExplorer();
+
+
+            #region Also for configre ApiBehaviorOptions in other way
+            //webAppilcationBuilder.Services.Configure<ApiBehaviorOptions>(options => {
+            //		options.SuppressModelStateInvalidFilter = true;
+            //		options.InvalidModelStateResponseFactory = (ActionContext) =>
+            //		{
+            //			var erros = ActionContext.ModelState.Where(m => m.Value!.Errors.Count > 0)
+            //						 .ToDictionary(kv =>
+            //						 kv.Key, kv => kv.Value!.Errors.Select(e => e.ErrorMessage).ToList());
+            //			return new BadRequestObjectResult(new ValidationApiResponse() { Errors = erros });
+
+            //		};
+            //	}); 
+            #endregion
+            webAppilcationBuilder.Services.AddInfrastrctureServices(webAppilcationBuilder.Configuration);
+            webAppilcationBuilder.Services.AddEndpointsApiExplorer();
 			webAppilcationBuilder.Services.AddSwaggerGen();
 			webAppilcationBuilder.Services.AddHttpContextAccessor();
+		//	webAppilcationBuilder.Services.AddScoped(typeof(UserManager<>));
 			
 
 			//webAppilcationBuilder.Services.AddDbContext<StoreContext>(optionsBuilder =>
@@ -103,9 +105,13 @@ namespace LinkDev.Talabat.Api
 		///	webAppilcationBuilder.Services.AddScoped(typeof(IHttpContextAccessor), typeof(HttpContextAccessor));
 			webAppilcationBuilder.Services.AddPersistanceServices(webAppilcationBuilder.Configuration);
 		    webAppilcationBuilder.Services.AddApplicationServices();
+
+			#region Identity Services
 			//webAppilcationBuilder.Services.AddScoped(typeof(UserManager<ApplicationUser>)); Wrong way for regisiteration this 
 			//webAppilcationBuilder.Services.AddIdentity<ApplicationUser, IdentityRole>();
-			webAppilcationBuilder.Services.AddIdentityServices(webAppilcationBuilder.Configuration);
+			webAppilcationBuilder.Services.AddIdentityServices(webAppilcationBuilder.Configuration); 
+			#endregion
+
 			#endregion
 
 			var app = webAppilcationBuilder.Build();//build web application
@@ -134,16 +140,20 @@ namespace LinkDev.Talabat.Api
 									  //http so this will  redirect to https using his security certificate
 									  //to increase security
 
-			//			app.UseAuthorization();
+			
+          //  app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
-			app.UseStatusCodePagesWithReExecute("/Error/{0}");
-			app.MapControllers();//to use the route attriute in every controller means  each controller annotated as[ApiController]
-								//
-		 //app.MapControllerRoute()//for mvc
-			app.UseAuthentication();
-			app.UseAuthorization();
-			#endregion
-			app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseAuthorization();
+          
+            app.MapControllers();//to use the route attriute in every controller means  each controller annotated as[ApiController]
+                                 //
+                                 //app.MapControllerRoute()//for mvc
+
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+            #endregion
+            app.UseStaticFiles();
 			app.Run();
 		}
 	}

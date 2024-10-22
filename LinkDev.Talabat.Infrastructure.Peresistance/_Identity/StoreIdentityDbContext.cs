@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Identity
 {
-	public class StoreIdentityDbContext : IdentityDbContext<ApplicationUser,IdentityRole,string>	{
+	public class StoreIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRole,string>	{
 
         public StoreIdentityDbContext(DbContextOptions<StoreIdentityDbContext>  dbContextOptions):
 			base(dbContextOptions)

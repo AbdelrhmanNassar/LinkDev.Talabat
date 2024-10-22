@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace LinkDev.Talabat.Api.Extensions
 {
-    public static class IntializeStoreContext
+    public static class IntializeDbContexts
 	{
 		public static async Task<WebApplication>  intializeStoreDbContex(this WebApplication app)
 		{

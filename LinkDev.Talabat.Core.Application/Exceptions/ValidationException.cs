@@ -8,8 +8,8 @@ namespace LinkDev.Talabat.Core.Application.Exceptions
 {
 	internal class ValidationException :BadRequestException
 	{
-        public required IEnumerable<string> Errors { get; set; }
-        public ValidationException():base("Validation Error")
+      //  public required IEnumerable<string> Errors { get; set; }
+        public ValidationException(IEnumerable<string> errors) :base( string.Join(",", errors))
         {
             
         }

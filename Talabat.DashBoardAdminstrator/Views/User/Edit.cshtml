@@ -1,0 +1,40 @@
+﻿@model UserEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<hr />
+<div class="container">
+    <form asp-action="Edit" method="post"></form>
+            <input asp-for="UserId" class="from-control" hidden/>
+            <div>
+                <label asp-for="UserName" class="col-form-label" ></label>
+                <input asp-for="UserName" class="form-control" ></input>
+
+
+            </div>
+    <hr />
+            <h3>Manage User Roles</h3>
+    @foreach(var r in Model.Roles)
+    {
+        <div>
+            <input asp-for="@r.Name" hidden/>
+            <input asp-for="@r.IsSelected" class="form-check-label" />
+            <label asp-for="@r" class="form-check-label"> @r.Name </label>
+            <span asp-validation-for="Roles" ></span>
+        </div>
+
+        
+    }
+   <br />
+   <input type="submit" class="btn btn-success" value="save" />
+   <a asp-action="Index" class="btn btn-primary">Back To Index</a>
+
+
+
+
+
+</div>
+
+
