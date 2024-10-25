@@ -17,20 +17,30 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance._Common
     //}
 
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public  class DbContextTypeAttribute : Attribute
+    //[AttributeUsage(AttributeTargets.Class)]
+    //public  class DbContextTypeAttribute : Attribute
+    //{
+    //    public Type DbContextType { get; set; }
+    //    public DbContextTypeAttribute(Type type)
+    //    {
+    //        this.DbContextType = type;
+    //    }
+    //}
+
+
+
+
+    public class DbContextTypeAttribute : Attribute
     {
+
         public Type DbContextType { get; set; }
+
         public DbContextTypeAttribute(Type type)
         {
-            this.DbContextType = type;
+            DbContextType = type;
         }
+
     }
-
-
-
-
-
 
 
 

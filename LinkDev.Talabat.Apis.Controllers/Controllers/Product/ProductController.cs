@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
 {
+	
 	[ApiController]
     [Route("api/[controller]")]
     public class ProductController(IServiceManager serviceManager) : ApiControllerBase

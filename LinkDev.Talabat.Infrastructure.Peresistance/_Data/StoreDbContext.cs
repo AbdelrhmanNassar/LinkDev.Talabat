@@ -1,7 +1,9 @@
 ﻿using LinkDev.Talabat.Core.Domain.Comman;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Infrastructure.Peresistance._Common;
+using LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Product;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,14 @@ namespace LinkDev.Talabat.Infrastrucutre.Infrastructure._Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			//	modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//i prefer this
-			///	modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreContext).Assembly);
-			//  modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) => type.Namespace!.Contains( "LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations"));
+			//modelBuilder.ApplyConfiguration(new BrandConfigurations());
+			//modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//i prefer this
+			//																			  //	modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreContext).Assembly);
+			//																			  //  modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) => type.Namespace!.Contains( "LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations"));
+			//modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) => (
+			//type.Namespace.Contains(nameof(LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations)))
+			//);
+		
 
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) =>	type.GetCustomAttribute<DbContextTypeAttribute>()?.DbContextType == typeof(StoreDbContext)); 
 			

@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Enities.Identity
 {
-    [Serializable]
+    
 	public class Address
 	{
+
+
 
         public int Id { get; set; }
         public required string FirstName { get; set; }

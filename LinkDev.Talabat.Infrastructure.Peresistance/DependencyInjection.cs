@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using LinkDev.Talabat.Infrastructure.Peresistance._Date;
 using LinkDev.Talabat.Infrastructure.Peresistance.Identity;
 using LinkDev.Talabat.Infrastructure.Peresistance._Identity;
+using LinkDev.Talabat.Core.Domain.Contracts.Persistance.DbInitializers;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance
 {

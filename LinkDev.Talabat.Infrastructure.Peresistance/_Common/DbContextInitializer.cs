@@ -1,4 +1,4 @@
-﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
+﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance.DbInitializers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance._Common
 {
-	public abstract class DbContextInitializer(DbContext context) : IDbContextIntializer
+    public abstract class DbContextInitializer(DbContext context) : IDbContextIntializer
 	{
 		public async Task InializeAsync()
 		{

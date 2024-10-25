@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Base
 {
+	//[DbContextTypeAttribute(typeof(StoreDbContext))]
+	//any one inhirts from you will take this attribute
 	[DbContextTypeAttribute(typeof(StoreDbContext))]
-	 //any one inhirts from you will take this attribute
 	public class BaseEnitiyConfigurations<TEntity,Tkey> : IEntityTypeConfiguration<TEntity>
 		where TEntity : BaseEntity<Tkey>
 		where Tkey : IEquatable<Tkey>

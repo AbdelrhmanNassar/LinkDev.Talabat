@@ -6,7 +6,7 @@ namespace Talabat.DashBoard.Controllers
 {
     public class RoleController(RoleManager<IdentityRole> _roleManager) : Controller
     {
-        public async Task<IActionResult>()
+        public async Task<IActionResult> Index()
         {
             //get all the roles
             var roles = await _roleManager.Roles.Select(r => r.Name).ToListAsync(); 

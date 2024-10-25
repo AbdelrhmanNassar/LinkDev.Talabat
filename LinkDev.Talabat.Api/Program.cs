@@ -118,7 +118,7 @@ namespace LinkDev.Talabat.Api
 
 			#region intialize StoreContext database
 			await app.intializeStoreDbContex();
-			await app.intializeStoreIdentityDbContex();
+			
 
 			#endregion
 

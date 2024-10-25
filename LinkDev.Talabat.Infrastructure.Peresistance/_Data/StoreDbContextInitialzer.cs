@@ -1,10 +1,10 @@
-﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
+﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance.DbInitializers;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Infrastructure.Peresistance._Common;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;

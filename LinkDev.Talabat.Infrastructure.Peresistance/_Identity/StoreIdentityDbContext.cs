@@ -30,8 +30,9 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.Identity
 			//builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) =>type.Namespace == "LinkDev.Talabat.Infrastructure.Peresistance._Identity.Configurations");
-			
-			
+
+			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) =>
+			type.GetCustomAttribute<DbContextTypeAttribute>()?.DbContextType == typeof(StoreIdentityDbContext));
 			
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), (type) => type.GetCustomAttribute<DbContextTypeAttribute>()?.DbContextType == typeof(StoreIdentityDbContext));
 			

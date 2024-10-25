@@ -33,9 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkDev.Talabat.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkDev.Talabat.Apis.Controllers", "LinkDev.Talabat.Apis.Controllers\LinkDev.Talabat.Apis.Controllers.csproj", "{52672BD6-EB3D-4547-8427-E6B1419E041A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.DashBoard", "Talabat.DashBoard\Talabat.DashBoard.csproj", "{2002C6F5-3F35-4C36-BD9E-ED187D0EA450}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talabat.DashBoardAdminstrator", "Talabat.DashBoardAdminstrator\Talabat.DashBoardAdminstrator.csproj", "{5B0A6735-8767-4EDC-A02A-1CC89C1F3344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.DashBoardAdminstrator", "Talabat.DashBoardAdminstrator\Talabat.DashBoardAdminstrator.csproj", "{5B0A6735-8767-4EDC-A02A-1CC89C1F3344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +69,6 @@ Global
 		{52672BD6-EB3D-4547-8427-E6B1419E041A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52672BD6-EB3D-4547-8427-E6B1419E041A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52672BD6-EB3D-4547-8427-E6B1419E041A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2002C6F5-3F35-4C36-BD9E-ED187D0EA450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2002C6F5-3F35-4C36-BD9E-ED187D0EA450}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2002C6F5-3F35-4C36-BD9E-ED187D0EA450}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2002C6F5-3F35-4C36-BD9E-ED187D0EA450}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B0A6735-8767-4EDC-A02A-1CC89C1F3344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B0A6735-8767-4EDC-A02A-1CC89C1F3344}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B0A6735-8767-4EDC-A02A-1CC89C1F3344}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,7 +91,6 @@ Global
 		{F4ADDDA6-6DD8-430C-B267-0F3A7B31E6FB} = {885E777C-C7D3-4EEE-87B6-0211D8DFAB70}
 		{BE7D4495-56B2-498F-A502-386D7D304318} = {885E777C-C7D3-4EEE-87B6-0211D8DFAB70}
 		{52672BD6-EB3D-4547-8427-E6B1419E041A} = {DC4A5B95-7ABC-4337-A6AC-5F6726AEAFAF}
-		{2002C6F5-3F35-4C36-BD9E-ED187D0EA450} = {01E89F0D-C63D-4558-93A4-5116EFA349BA}
 		{5B0A6735-8767-4EDC-A02A-1CC89C1F3344} = {01E89F0D-C63D-4558-93A4-5116EFA349BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
