@@ -24,13 +24,24 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
 			var user = await userManager.FindByEmailAsync(model.Email);
 			if (user is null)
 				throw new UnAuthorizedException("Invalid Login");
-			var result = await signInManager.CheckPasswordSignInAsync(user ,model.Password, true);
-			
 
-			if(!result.Succeeded)
+
+			var result = await signInManager.CheckPasswordSignInAsync(user, model.Password, true);
+
+			if (result.IsNotAllowed)
+				throw new UnAuthorizedException("Not Allowed To Login.");//Should be register
+			if (result.IsLockedOut)
+				throw new UnAuthorizedException("Locked out.");
+			if (result.RequiresTwoFactor)
+				throw new UnAuthorizedException("Two Factor auth is required out.");
+
+			if (!result.Succeeded)
 				throw new UnAuthorizedException("Invalid Login");
+         
 
-			var response = new UserDto() { 
+            
+
+            var response = new UserDto() { 
 				DisplayName=user.DisplayName,
 				Email=user.Email!,
 				Id =user.Id,

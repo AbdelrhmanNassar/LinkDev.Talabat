@@ -2,6 +2,7 @@
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using LinkDev.Talabat.Core.Application.Abstraction;
 using LinkDev.Talabat.Core.Application.Exceptions;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace LinkDev.Talabat.Apis.MiddleWares
@@ -71,7 +72,17 @@ namespace LinkDev.Talabat.Apis.MiddleWares
 
 
 					break;
-				case BadRequestException:
+				//	could be handeled as BadRequestException
+                //case ValidationException:
+
+                //	httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                //	httpContext.Response.ContentType = "application/json";
+                //	response = new ValidationApiResponse( ex.Message) { Errors =ValidationExceptions};
+                //	httpContext.Response?.WriteAsync(response.ToString());
+
+
+                //	break;
+                case BadRequestException:
 					httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 					httpContext.Response.ContentType = "application/json";
 					response = new ApiResponse(400, ex.Message);
