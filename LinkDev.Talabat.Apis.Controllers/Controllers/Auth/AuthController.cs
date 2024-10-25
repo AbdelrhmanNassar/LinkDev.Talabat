@@ -13,6 +13,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Auth
 	[ApiController]
 	public class AuthController(IServiceManager serviceManager) : ApiControllerBase
 	{
+
 		[HttpPost("login")]
 		public async Task<ActionResult<UserDto>> Login(LoginDto model)
 		{

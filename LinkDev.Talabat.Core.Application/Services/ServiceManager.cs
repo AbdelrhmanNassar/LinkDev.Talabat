@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Application.Services
 {
-	internal class ServiceManager : IServiceManager
+	public class ServiceManager : IServiceManager
 	{
 		private Lazy< IProductService> _productService; //this is the backing field of ProductService
 		private Lazy<IBasketService > _basketService; //this is the backing field of ProductService

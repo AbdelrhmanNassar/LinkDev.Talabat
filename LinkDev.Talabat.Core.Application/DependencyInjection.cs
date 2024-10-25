@@ -27,7 +27,7 @@ namespace LinkDev.Talabat.Core.Application
 			//services.AddAutoMapper(typeof(MappingProfile).Assembly);
 			services.AddAutoMapper(typeof(MappingProfile));
 	
-			services.AddScoped(typeof(IServiceManager), typeof(LinkDev.Talabat.Core.Application.Services.ServiceManager));
+			services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
 			services.AddScoped<IBasketService, BasketService>();
 			services.AddScoped(typeof(Func<IBasketService>), (servicesProvider) =>
 			{

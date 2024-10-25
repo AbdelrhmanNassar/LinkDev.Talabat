@@ -54,22 +54,21 @@ namespace Talabat.DashBoardAdminstrator.Controllers
             };
             return View(vm);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(string id, UserEditViewModel model)
-        //{
-        //    ApplicationUser user =await _userManager.FindByIdAsync(id);
-        //    var userroles = await _userManager.GetRolesAsync(user);
-        //    foreach(var role in model.Roles)
-        //    {
-        //        if(userroles.Any(r=>r == role.Name) && !role.IsSelected)
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, UserEditViewModel model)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            var userroles = await _userManager.GetRolesAsync(user);
+            foreach (var role in model.Roles)
+            {
+                if (userroles.Any(r => r == role.Name) && !role.IsSelected)
+                    await _userManager.RemoveFromRoleAsync(user, role.Name);
+                if (!userroles.Any(r => r == role.Name) && role.IsSelected)
+                    await _userManager.AddToRoleAsync(user, role.Name);
+            }
+            return RedirectToAction(nameof(Index));
 
-
-
-        //    }
-           
-        //    return RedirectToAction(nameof(Index));
-
-        //}
+        }
 
 
     }

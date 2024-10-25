@@ -1,4 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Enities.Identity;
+using LinkDev.Talabat.Infrastructure.Peresistance._Common;
+using LinkDev.Talabat.Infrastructure.Peresistance.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -8,8 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance._Identity.Configurations
+
 {
-	internal class ApplicationUserConfigurations : IEntityTypeConfiguration<ApplicationUser>
+    [DbContextTypeAttribute(typeof(StoreIdentityDbContext))]
+    internal class ApplicationUserConfigurations : IEntityTypeConfiguration<ApplicationUser>
 	{
 		public void Configure(EntityTypeBuilder<ApplicationUser> builder)
 		{

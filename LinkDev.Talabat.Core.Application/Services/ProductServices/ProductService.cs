@@ -61,8 +61,10 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
             return mapper.Map<IReadOnlyList<CategoryDto>>(await unitOfWork.GetRepository<ProductCategory, int>().GetAllAsync());
         }
 
-
-
-
+        public async Task<IReadOnlyList<ProductToReturnDto>> GetAllProductAsync()
+        {
+            
+            return mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>> (await unitOfWork.GetRepository<Product,int>().GetAllAsync() );
+        }
     }
 }

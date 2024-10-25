@@ -1,8 +1,11 @@
+using LinkDev.Talabat.Core.Application.Abstraction.ServiceManager;
+using LinkDev.Talabat.Core.Application.Services;
 using LinkDev.Talabat.Core.Domain.Enities.Identity;
 using LinkDev.Talabat.Infrastructure.Peresistance.Identity;
 using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Talabat.DashBoardAdminstrator.Mapping;
 
 namespace Talabat.DashBoardAdminstrator
 {
@@ -39,7 +42,8 @@ namespace Talabat.DashBoardAdminstrator
 
 
             }).AddEntityFrameworkStores<StoreIdentityDbContext>();
-
+            builder.Services.AddScoped(typeof(IServiceManager),typeof(ServiceManager));
+            builder.Services.AddAutoMapper(typeof(MappingProfilesDashboard));
             #endregion
             #region StoreConfigurations
             builder.Services.AddDbContext<StoreDbContext>(optionsBuilder =>
@@ -69,7 +73,7 @@ namespace Talabat.DashBoardAdminstrator
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Admin}/{action=Login}/{id?}");
 
             app.Run();
         }

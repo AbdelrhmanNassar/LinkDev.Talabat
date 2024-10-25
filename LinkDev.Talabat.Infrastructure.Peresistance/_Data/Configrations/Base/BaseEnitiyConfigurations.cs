@@ -1,4 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Comman;
+using LinkDev.Talabat.Infrastructure.Peresistance._Common;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance._Data.Configrations.Base
 {
+	[DbContextTypeAttribute(typeof(StoreDbContext))]
+	 //any one inhirts from you will take this attribute
 	public class BaseEnitiyConfigurations<TEntity,Tkey> : IEntityTypeConfiguration<TEntity>
 		where TEntity : BaseEntity<Tkey>
 		where Tkey : IEquatable<Tkey>
