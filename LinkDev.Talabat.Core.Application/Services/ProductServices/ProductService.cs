@@ -28,6 +28,7 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
             this.mapper = mapper;
         }
         public async Task<Pagination<ProductToReturnDto>> GetAllProductAsync(ProductSpecificationParams specParams)
+            
         {
             var spec = new ProductWithBrandAndCategorySpecifications(specParams.Sort, specParams.CategoryId, specParams.BrandId, specParams.PageSize, specParams.PageIndex, specParams.Search);
             var products =  mapper.Map<IReadOnlyList<ProductToReturnDto>>(await unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec));
@@ -36,6 +37,7 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
 			var count = await unitOfWork.GetRepository<Product,int>().GetCountAsync(countSpec) ;
             return new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize,products,count );
 		}
+   
 
         public async Task<ProductToReturnDto> GetProductAsync(int id)
             {
@@ -59,8 +61,10 @@ namespace LinkDev.Talabat.Core.Application.Services.ProductServices
             return mapper.Map<IReadOnlyList<CategoryDto>>(await unitOfWork.GetRepository<ProductCategory, int>().GetAllAsync());
         }
 
-
-
-
+        public async Task<IReadOnlyList<ProductToReturnDto>> GetAllProductAsync()
+        {
+            
+            return mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>> (await unitOfWork.GetRepository<Product,int>().GetAllAsync() );
+        }
     }
 }

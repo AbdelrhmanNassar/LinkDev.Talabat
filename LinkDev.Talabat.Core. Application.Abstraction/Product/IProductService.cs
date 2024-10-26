@@ -12,6 +12,7 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.Product
 	public interface IProductService
 	{
 		Task<Pagination<ProductToReturnDto>> GetAllProductAsync(ProductSpecificationParams specParams);
+		Task<IReadOnlyList<ProductToReturnDto>> GetAllProductAsync();
 
 		Task<ProductToReturnDto> GetProductAsync(int id);
 

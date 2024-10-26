@@ -4,18 +4,18 @@ using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
 using LinkDev.Talabat.Infrastructure.Peresistance.Repositries;
 using LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo;
-using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using System.Collections.Concurrent;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
 
 	{
-		private readonly StoreContext _storeContext; 
+		private readonly StoreDbContext _storeContext; 
 		private readonly ConcurrentDictionary<string,object> _repositories;
 
-		public UnitOfWork(StoreContext storeContext)
+		public UnitOfWork(StoreDbContext storeContext)
         { 
             _storeContext = storeContext;
 			_repositories = new ConcurrentDictionary<string,object>();

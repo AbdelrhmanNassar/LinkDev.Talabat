@@ -2,20 +2,12 @@
 using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Enities.Product;
-using LinkDev.Talabat.Core.Domain.Specifications.ProductSpec;
-using LinkDev.Talabat.Infrastructure.Peresistance.Data;
-using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance.Repositries.GenericRepo
 {
-    internal class GenericRepo<TEnitity, Tkey>(StoreContext storeContext) : IGenericRepository<TEnitity, Tkey>
+	internal class GenericRepo<TEnitity, Tkey>(StoreDbContext storeContext) : IGenericRepository<TEnitity, Tkey>
         where TEnitity : BaseEntity<Tkey>
         where Tkey : IEquatable<Tkey>
     {

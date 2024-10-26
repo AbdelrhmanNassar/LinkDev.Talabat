@@ -1,18 +1,15 @@
 ﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Infrastructure.Peresistance.Interceptors;
-using LinkDev.Talabat.Infrastrucutre.Infrastructure.Date;
+using LinkDev.Talabat.Infrastrucutre.Infrastructure._Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork;
-using LinkDev.Talabat.Infrastructure.Peresistance.Data;
+using LinkDev.Talabat.Infrastructure.Peresistance._Date;
+using LinkDev.Talabat.Infrastructure.Peresistance.Identity;
+using LinkDev.Talabat.Infrastructure.Peresistance._Identity;
+using LinkDev.Talabat.Core.Domain.Contracts.Persistance.DbInitializers;
 
 namespace LinkDev.Talabat.Infrastructure.Peresistance
 {
@@ -21,17 +18,33 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance
         public static IServiceCollection AddPersistanceServices(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddDbContext<StoreContext>(optionsBuilder =>
+
+            #region StoreDbContext
+            services.AddDbContext<StoreDbContext>(optionsBuilder =>
             {
                 optionsBuilder.UseLazyLoadingProxies();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("storeConnection"));
 
             });
-            services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreContextInitialzer));
-            services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreContextInitialzer));
+            services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreDbContextInitialzer));
+            //services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreDbContextInitialzer));
             services.AddScoped(typeof(ISaveChangesInterceptor), typeof(CustomSaveChangesInterceptor));//It was before
-                                                                                                      //services.AddScoped(typeof(ISaveChangesInterceptor),typeof(SaveChangesInterceptor));
-            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+																									  //services.AddScoped(typeof(ISaveChangesInterceptor),typeof(SaveChangesInterceptor)); 
+			#endregion
+			#region IdentityDbContext
+			services.AddDbContext<StoreIdentityDbContext>(optionsBuilder =>
+			{
+				optionsBuilder.UseLazyLoadingProxies();
+				optionsBuilder.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+
+			});
+			services.AddScoped(typeof(IStoreIdentityInitailzer), typeof(StoreIdentityDbIntailizer));//use it in the intailzer
+
+			//services.AddScoped(typeof(IStoreContextInitialzer), typeof(StoreDbContextInitialzer));
+			//services.AddScoped(typeof(ISaveChangesInterceptor), typeof(CustomSaveChangesInterceptor));//I
+			#endregion
+			services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+            
             return services;
 
 

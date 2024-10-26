@@ -2,6 +2,7 @@
 using LinkDev.Talabat.Apis.Controllers.Controllers.Errors;
 using LinkDev.Talabat.Core.Application.Abstraction;
 using LinkDev.Talabat.Core.Application.Exceptions;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace LinkDev.Talabat.Apis.MiddleWares
@@ -31,8 +32,10 @@ namespace LinkDev.Talabat.Apis.MiddleWares
 				//Logic After Next
 				if (httpContext.Response.StatusCode == (int)HttpStatusCode.NotFound)
 				{
+						//httpContext.Response.Body
 					var response = new ApiResponse((int)HttpStatusCode.NotFound,$"the requested endpoint{httpContext.Request.Path} is not found" );
-					httpContext.Response.WriteAsync(response.ToString());
+					var m = httpContext.Response.Body;
+                    	httpContext.Response.WriteAsync( m+ response.ToString());
 				}
 
 			}
@@ -69,10 +72,27 @@ namespace LinkDev.Talabat.Apis.MiddleWares
 
 
 					break;
-				case BadRequestException:
+				//	could be handeled as BadRequestException
+                //case ValidationException:
+
+                //	httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                //	httpContext.Response.ContentType = "application/json";
+                //	response = new ValidationApiResponse( ex.Message) { Errors =ValidationExceptions};
+                //	httpContext.Response?.WriteAsync(response.ToString());
+
+
+                //	break;
+                case BadRequestException:
 					httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 					httpContext.Response.ContentType = "application/json";
 					response = new ApiResponse(400, ex.Message);
+					httpContext.Response?.WriteAsync(response.ToString());
+					break;
+
+				case UnAuthorizedException:
+					httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+					httpContext.Response.ContentType = "application/json";
+					response = new ApiResponse(401, ex.Message);
 					httpContext.Response?.WriteAsync(response.ToString());
 
 
