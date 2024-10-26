@@ -27,38 +27,39 @@ namespace LinkDev.Talabat.Core.Application
 			//services.AddAutoMapper(typeof(MappingProfile).Assembly);
 			services.AddAutoMapper(typeof(MappingProfile));
 	
-			services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
+			
 			services.AddScoped<IBasketService, BasketService>();
-			services.AddScoped(typeof(Func<IBasketService>), (servicesProvider) =>
-			{
-				var mapper = servicesProvider.GetRequiredService<IMapper>();
-				var configuration = servicesProvider.GetRequiredService<IConfiguration>();
-				var basketRepo = servicesProvider.GetRequiredService<IBasketRepository>();
-				return () => new BasketService(basketRepo, mapper, configuration);
-			});
+			//services.AddScoped(typeof(Func<IBasketService>), (servicesProvider) =>
+			//{
+			//	var mapper = servicesProvider.GetRequiredService<IMapper>();
+			//	var configuration = servicesProvider.GetRequiredService<IConfiguration>();
+			//	var basketRepo = servicesProvider.GetRequiredService<IBasketRepository>();
+			//	return () => new BasketService(basketRepo, mapper, configuration);
+			//});
 
 			services.AddScoped<IAuthService, AuthService>();
 
-			services.AddScoped(typeof(Func<IAuthService>), (serviceProvider) =>
+			//services.AddScoped(typeof(Func<IAuthService>), (serviceProvider) =>
 
-			{
-                #region A Way
-                //var userMananger = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                //var SignInManager = serviceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
-                //var jwtSettings = serviceProvider.GetRequiredService<IOptions<JwtSettings>>();
-                ////var jwtSettings = services.Configure<JwtSettings>(configuration.GetSection("JWTSettings"));
+			//{
+   //             #region A Way
+   //             //var userMananger = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+   //             //var SignInManager = serviceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
+   //             //var jwtSettings = serviceProvider.GetRequiredService<IOptions<JwtSettings>>();
+   //             ////var jwtSettings = services.Configure<JwtSettings>(configuration.GetSection("JWTSettings"));
 
-                //	return () => new AuthService(userMananger, SignInManager,jwtSettings); 
-                #endregion
-                #region other way (for sure it's better because most of these services which you need are registerd so you don't need to ask twice)
-                //(And aslo you registeried auth service(services.AddScoped<IAuthService, AuthService>()) and it will create the dependencties of AuthService because they are
-				//registered and it needs it for creating object of AuthService)
+   //             //	return () => new AuthService(userMananger, SignInManager,jwtSettings); 
+   //             #endregion
+   //             #region other way (for sure it's better because most of these services which you need are registerd so you don't need to ask twice)
+   //             //(And aslo you registeried auth service(services.AddScoped<IAuthService, AuthService>()) and it will create the dependencties of AuthService because they are
+			//	//registered and it needs it for creating object of AuthService)
               
-                return () => serviceProvider.GetRequiredService<IAuthService>(); 
-				#endregion
-			});
+   //             return () => serviceProvider.GetRequiredService<IAuthService>(); 
+			//	#endregion
+			//});
+            services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
 
-			return services;
+            return services;
 		}
 	}
 }

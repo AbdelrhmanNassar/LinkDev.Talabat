@@ -12,7 +12,7 @@ namespace Talabat.DashBoardAdminstrator.Controllers
         {
             var products = await serviceManager.ProductService.GetAllProductAsync();
             var productsViewModel = mapper.Map  <IReadOnlyList< ProductToReturnDto>,IReadOnlyList< ProductViewModel>>(products);
-            return View();
+            return View(productsViewModel);
         }
     }
 }

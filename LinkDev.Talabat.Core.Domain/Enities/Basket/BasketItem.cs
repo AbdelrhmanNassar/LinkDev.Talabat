@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Enities.Basket
 {
-	public class BasketItem
+	public class BasketItem 
 	{
-		public int Id { get; set; }
-		public required string ProductName { get; set; }
+        public required int Id { get; set; }
+        public required string ProductName { get; set; }
 		public string? PictureUrl { get; set; }
 		public decimal Price { get; set; }
 		public int Quantity { get; set; }

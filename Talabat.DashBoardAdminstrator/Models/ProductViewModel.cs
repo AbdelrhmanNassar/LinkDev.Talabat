@@ -21,9 +21,15 @@ namespace Talabat.DashBoardAdminstrator.Models
             [Range(1, 100000)]
             public decimal Price { get; set; }
 
+                
+
             [Required(ErrorMessage = "ProductBrandId is Required")]
             public int BrandId { get; set; }
             public ProductBrand ProductBrand { get; set; }
+
+            [Required(ErrorMessage = "ProductCategory Id is Required")]
+            public int ProductCategoryId { get; set; }
+            public ProductCategory ProductCategory{ get; set; }
         }
 
     

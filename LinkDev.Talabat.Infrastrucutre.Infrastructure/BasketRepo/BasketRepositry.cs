@@ -29,14 +29,14 @@ namespace LinkDev.Talabat.Infrastrucutre.Infrastructure.BasketRepo
 			return basket.IsNullOrEmpty ?null :JsonSerializer.Deserialize<CustomerBasket>(basket!);
 		}
 
-		public async Task<CustomerBasket?> UpdateAsync(CustomerBasket basket, TimeSpan timeSpan)
-		{
-			var value = JsonSerializer.Serialize(basket);
+        public async Task<CustomerBasket?> UpdateAsync(CustomerBasket basket, TimeSpan timeSpan)
+        {
+            var value = JsonSerializer.Serialize(basket);
 
-			var updated = await redix.GetDatabase().StringSetAsync(basket.Id, value, timeSpan);
-			if (updated) return basket;
-			return
-				 null;
-		}
-	}
+            var updated = await redix.GetDatabase().StringSetAsync(basket.Id, value, timeSpan);
+            if (updated) return basket;
+            return
+                 null;
+        }
+    }
 }

@@ -11,6 +11,8 @@ namespace Talabat.DashBoardAdminstrator.Mapping
         public MappingProfilesDashboard()
         {
             CreateMap<ProductToReturnDto, ProductViewModel>()
+                .ForPath((vm)=>vm.ProductBrand.Name ,(options)=> options.MapFrom(p=>p.ProductBrand))
+                .ForPath((vm)=>vm.ProductCategory.Name ,(options)=> options.MapFrom(p=>p.ProductCategory))
                 .ReverseMap();
         }
     }
