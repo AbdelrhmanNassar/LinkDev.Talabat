@@ -20,7 +20,7 @@ namespace LinkDev.Talabat.Apis.Controllers.Controllers.Product
     [Route("api/[controller]")]
     public class ProductController(IServiceManager serviceManager) : ApiControllerBase
 	{
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	//	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 		[HttpGet] //Get:/api/Product
 		public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecificationParams specParams) //this is like what we had read in the artical
 			//i want the the api  be  at most 2 lines

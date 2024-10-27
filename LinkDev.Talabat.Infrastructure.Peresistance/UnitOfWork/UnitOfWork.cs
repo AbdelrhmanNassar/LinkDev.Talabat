@@ -21,7 +21,7 @@ namespace LinkDev.Talabat.Infrastructure.Peresistance.UnitOfWork
 			_repositories = new ConcurrentDictionary<string,object>();
         }
        
-		public Task<int> CompeletAsnc()
+		public Task<int> CompleteAsync()
 		=>_storeContext.SaveChangesAsync();
 		public ValueTask DisposeAsync()
 		=>_storeContext.DisposeAsync();

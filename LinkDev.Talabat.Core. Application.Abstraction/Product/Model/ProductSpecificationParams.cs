@@ -24,8 +24,8 @@ namespace LinkDev.Talabat.Core._Application.Abstraction.Product.Model
 
 
 
-		private int maxSize = 10;
-		private int pageSize =10;
+		private int maxSize = 20;
+		private int pageSize =20;
 		public int PageSize
 		{
 			get { return pageSize; }

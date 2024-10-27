@@ -14,7 +14,7 @@ namespace LinkDev.Talabat.Core.Domain.Contracts.Persistance
             where Tkey : IEquatable<Tkey>;
 
 
-        Task<int> CompeletAsnc();
+        Task<int> CompleteAsync();
 
     }
 }

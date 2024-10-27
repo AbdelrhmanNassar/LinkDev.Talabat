@@ -9,6 +9,6 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.Product.Model
 	public class BrandDto
 	{
 		public int Id { get; set; }
-		public required string Name { get; set; }
+		public  string Name { get; set; }
 	}
 }

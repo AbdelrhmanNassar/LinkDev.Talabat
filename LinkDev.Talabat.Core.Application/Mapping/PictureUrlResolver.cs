@@ -21,7 +21,9 @@ namespace LinkDev.Talabat.Core.Application.Mapping
 		{
 			if (!string.IsNullOrEmpty(source.PictureUrl))
 			{
-				return $"{"https://localhost:7219"}/{source.PictureUrl}";
+				//return $"{"https://localhost:7219"}/{source.PictureUrl}"; //i did that becasue i was not use any displayer 
+				//but i removed it because i need the url in mvc (dash board)
+				return source.PictureUrl ;
 			}
 			return string.Empty ;
 		}

@@ -13,9 +13,9 @@ namespace Talabat.DashBoardAdminstrator.Models
             [Required(ErrorMessage = "Description is Required")]
             public string Description { get; set; }
 
-            public IFormFile Image { get; set; }
+            public IFormFile? Image { get; set; }
 
-            public string PictureUrl { get; set; }
+            public string? PictureUrl { get; set; }
 
             [Required(ErrorMessage = "Price is Required")]
             [Range(1, 100000)]
@@ -25,11 +25,11 @@ namespace Talabat.DashBoardAdminstrator.Models
 
             [Required(ErrorMessage = "ProductBrandId is Required")]
             public int BrandId { get; set; }
-            public ProductBrand ProductBrand { get; set; }
+            public ProductBrand? ProductBrand { get; set; }
 
             [Required(ErrorMessage = "ProductCategory Id is Required")]
-            public int ProductCategoryId { get; set; }
-            public ProductCategory ProductCategory{ get; set; }
+            public int CategoryId { get; set; }
+            public ProductCategory? ProductCategory{ get; set; }
         }
 
     

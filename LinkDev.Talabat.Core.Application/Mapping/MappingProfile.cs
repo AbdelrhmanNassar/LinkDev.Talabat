@@ -16,16 +16,21 @@ namespace LinkDev.Talabat.Core.Application.Mapping
 	{
         public MappingProfile()
         {
-            CreateMap<ProductBrand, BrandDto>();
+            CreateMap<ProductBrand, BrandDto>()
+                .ReverseMap();
             CreateMap<ProductCategory, CategoryDto>();
 
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(Pto => Pto.ProductBrand, O => O.MapFrom(P => P.ProductBrand!.Name))// i should do some configurations because there is properites same name but not same type
 				.ForMember(Pto => Pto.ProductCategory, O => O.MapFrom(p => p.ProductCategory!.Name))
-                .ForMember(d => d.PictureUrl,O=>O.MapFrom<PictureUrlResolver>());
+                .ForMember(d => d.PictureUrl,O=>O.MapFrom<PictureUrlResolver>())
+                .ReverseMap()
+                 .ForMember(d => d.ProductBrand, O => O.Ignore()) // Ignore ProductBrand during reverse mapping because this nav property will be always null
+            .ForMember(d => d.ProductCategory, O => O.Ignore());
+            ;
 
 
-				;
+				
             CreateMap<CustomerBasket, CustomerBusketDto>()
                 .ReverseMap();
             CreateMap<BasketItem, BasketItemDto>()
